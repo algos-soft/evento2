@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="MySqlUnit">
+	
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		
+	    <class>it.algos.webbase.web.entity.BaseEntity</class>
+	    <class>it.algos.webbase.web.pref.PrefEntity</class>
+	    <class>it.algos.evento.pref.PrefEventoEntity</class>
+		<class>it.algos.webbase.domain.company.BaseCompany</class>
+		<class>it.algos.evento.entities.company.Company</class>
+		<class>it.algos.evento.entities.insegnante.Insegnante</class>
+		<class>it.algos.evento.entities.evento.Evento</class>
+		<class>it.algos.evento.entities.progetto.Progetto</class>
+		<class>it.algos.evento.entities.rappresentazione.Rappresentazione</class>
+		<class>it.algos.evento.entities.sala.Sala</class>
+		<class>it.algos.evento.entities.prenotazione.Prenotazione</class>
+		<class>it.algos.evento.entities.modopagamento.ModoPagamento</class>
+		<class>it.algos.evento.entities.scuola.Scuola</class>
+		<class>it.algos.evento.entities.comune.Comune</class>
+		<class>it.algos.evento.entities.prenotazione.eventi.EventoPren</class>
+	    <class>it.algos.evento.entities.lettera.Lettera</class>
+	    <class>it.algos.evento.entities.lettera.allegati.Allegato</class>
+		<class>it.algos.evento.entities.spedizione.Spedizione</class>
+		<class>it.algos.evento.entities.tiporicevuta.TipoRicevuta</class>
+		<class>it.algos.evento.entities.ordinescuola.OrdineScuola</class>
+		<class>it.algos.evento.entities.mailing.Mailing</class>
+		<class>it.algos.evento.entities.destinatario.Destinatario</class>
+		<class>it.algos.evento.entities.stagione.Stagione</class>
+
+
+		<class>it.algos.webbase.domain.ruolo.Ruolo</class>
+		<class>it.algos.webbase.domain.utente.Utente</class>
+		<class>it.algos.webbase.domain.pref.Pref</class>
+		<class>it.algos.webbase.domain.utenteruolo.UtenteRuolo</class>
+		<class>it.algos.webbase.domain.vers.Versione</class>
+
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.platform"
+				value="org.eclipse.persistence.platform.database.MySQLPlatform" />
+			<property name="javax.persistence.target-database" value="MySQL" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/evento?useUnicode=yes&amp;characterEncoding=UTF-8" />
+
+
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+			<property name="eclipselink.ddl-generation.output-mode" value="database" />
+			
+ 			<!--<property name="eclipselink.logging.level" value="FINE"/>-->
+<!-- 			<property name="eclipselink.ddl-generation.output-mode" value="none" /> -->
+
+ 			<!--<property name="eclipselink.ddl-generation.output-mode" value="sql-script" />-->
+ 			<!--<property name="eclipselink.create-ddl-jdbc-file-name" value="ddl.sql" />-->
+ 			<!--<property name="eclipselink.application-location" value="/Users/Gac" />-->
+
+
+		</properties>
+		
+		
+	</persistence-unit>
+
+</persistence>
+

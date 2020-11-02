@@ -1,0 +1,57 @@
+<img src="banner.png" height="45" width="120">
+<br>
+<br>
+<br>
+<br>
+<p>Spettabile ${nomeScuola}</p>
+${indirizzoScuola}<br>
+${localitaScuola}<br>
+<br>
+<br>
+Roma, ${dataCorrente}
+<br>
+<br>
+<br>
+Oggetto: Pagamento spettacolo “${titoloEvento}” del ${dataRappresentazione}
+<br>
+<br>
+<br>
+Si certifica che il pagamento ricevuto in data ${dataPagamentoRicevuto} di €. ${importoPagato}, a mezzo ${modoPagamento} è da attribuire all’acquisto di n. ${numPostiInteri} biglietti SIAE al costo unitario di €. ${importoIntero} e n. ${numPostiRidotti} al costo unitario di €. ${importoRidotto}.
+<br>
+<br>
+<br>
+Distinti saluti.
+<br>
+<br>
+Amministrazione Teatro a Scuola<br>
+Mario Rossi
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<table style="width:100%">
+  <tr  style="font-size:10px">
+    <td>
+        <p>
+        <br>Sede operativa:
+        <br>Coopertiva Teatro a Scuola
+        <br>P.zza Leonardo da Vinci 12
+        <br>00600 Roma
+        <br>tel 09 12345678 - fax 09 999888564
+        <br>Mail: info@teatroascuola.it
+        </p>
+    </td>
+    <td> 
+        <p>
+        <br>Sede Legale:
+        <br>Coopertiva Teatro a Scuola
+        <br>Via S. Rosmini 11
+        <br>00600 Roma
+        <br>Part. IVA  12154877965
+        <br>C.F. 000254789547
+        </p>
+    </td> 
+  </tr>
+</table>

@@ -1,0 +1,39 @@
+/*
+ * css fonts per manuale evento
+ * Author: @alex.valbo
+ */
+
+@font-face {
+    font-family: titillium;
+    src: url(../fonts/Titillium-Light.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: titillium;
+    src: url(../fonts/Titillium-BoldUpright.otf);
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: titillium;
+    src: url(../fonts/Titillium-LightItalic.otf);
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: titillium-condensed;
+    src: url(../fonts/Titillium-RegularUpright.otf);
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: titillium-condensed;
+    src: url(../fonts/Titillium-BoldUpright.otf);
+    font-weight: bold;
+    font-style: normal;
+}

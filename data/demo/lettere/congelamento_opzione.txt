@@ -1,0 +1,11 @@
+<p>Gentile ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},</p>
+<p>Le segnaliamo che in data <strong>${dataScadenzaConfermaPrenotazione}</strong> è scaduto il termine per l’invio della scheda di prenotazione necessario per la conferma della Sua opzione per l’evento <strong>${titoloEvento}</strong> del giorno <strong>${dataRappresentazione}</strong>.</p>
+<p><strong>DA QUESTO MOMENTO LA SUA OPZIONE VIENE CONGELATA IN ATTESA DI CONFERMA.</strong></p>
+<p>La invitiamo ad inviare al più presto la scheda di prenotazione come concordato al momento del primo contatto telefonico, o a ricontattarci nel caso di disdetta o situazioni particolari.</p>
+<p>Per le opzioni congelate in lista d’attesa non è garantita la disponibilità dei posti nella data indicata in prima battuta con l’opzione telefonica.</p>
+<p>Maggiori informazioni, regolamento e dettagli sul nostro sito alla pagina http://www.teatroascuola.it/regolamento</p>
+<p>Ringraziando per la Sua collaborazione inviamo i più cordiali saluti.</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>

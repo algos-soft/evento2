@@ -1,0 +1,18 @@
+// Global variable overrides. Must be declared before importing Valo.
+// Defines the plaintext font size, weight and family. Font size affects general component sizing.
+$v-font-size: 12px;
+$v-font-weight: 400;
+
+
+@import "../valo/valo.scss";
+@import "../algos.scss";
+@import "evento.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in .scss files */
+/* Questo prefisso deve avere lo stesso nome del theme! */
+.evento {
+  @include valo;
+  @include algos;
+  @include evento;
+}

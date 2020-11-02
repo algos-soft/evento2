@@ -1,0 +1,8 @@
+<p>Gentile ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},</p>
+<p>Le  confermiamo la registrazione dell’avvenuto pagamento di € ${importoPagato} relativo alla Sua prenotazione per l’evento <strong>${titoloEvento}</strong>  del giorno ${dataRappresentazione}.</p>
+<p>Grazie della Sua collaborazione.</p>
+<p>A presto!</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>

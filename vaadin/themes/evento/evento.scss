@@ -1,0 +1,125 @@
+/* This contains all of your theme.*/
+/* If somebody wants to extend the theme she will include this mixin. */
+@mixin evento {
+
+  .error-screen-msg {
+    font-size: 18px;
+    color: red
+  }
+
+  .loginbutton {
+    font-size: 20px;
+    font-weight: bold;
+    height: 2em;
+    min-width: 6em;
+  }
+
+  .redbold {
+    color: red;
+    font-weight: bold;
+  }
+
+  .hrule {
+    height: 0;
+    max-height: 0;
+  }
+
+  .infoBarTitle {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .infoBarSegment {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  // colore barra grigia (congelate)
+  //$darkblue: rgb(8, 96, 232);
+  //$lightblue: rgba(8, 96, 232, 0.6);
+  $darkgray: rgb(137, 137, 140);
+  $lightgray: rgba(137, 137, 140, 0.6);
+  .grayGradientBg {
+    background: $darkgray;
+    background: -webkit-linear-gradient(top, $darkgray,  $lightgray,  $darkgray);
+    background: -moz-linear-gradient(top,   $darkgray,  $lightgray,  $darkgray);
+    background: -o-linear-gradient(top,  $darkgray,  $lightgray,  $darkgray);
+    background: linear-gradient(top,  $darkgray,  $lightgray,  $darkgray);
+  }
+
+  // colore barra rossa (non confermate)
+  $darkred: rgba(217, 11, 0, 1);
+  $lightred: rgba(217, 11, 0, 0.6);
+  .redGradientBg {
+    background: $darkred;
+    background: -webkit-linear-gradient(top, $darkred,  $lightred,  $darkred);
+    background: -moz-linear-gradient(top,   $darkred,  $lightred,  $darkred);
+    background: -o-linear-gradient(top,  $darkred,  $lightred,  $darkred);
+    background: linear-gradient(top,  $darkred,  $lightred,  $darkred);
+  }
+
+  // colore barra arancione (confermate)
+  $darkorange: rgba(218, 115, 0, 1);
+  $lightorange: rgba(218, 115, 0, 0.6);
+  .orangeGradientBg {
+    background: $darkorange;
+    background: -webkit-linear-gradient(top, $darkorange, $lightorange, $darkorange);
+    background: -moz-linear-gradient(top, $darkorange, $lightorange, $darkorange);
+    background: -o-linear-gradient(top, $darkorange, $lightorange, $darkorange);
+    background: linear-gradient(top, $darkorange, $lightorange, $darkorange);
+  }
+
+  // colore barra marrone (pagamento confermato)
+  $darkgolden: rgba(184, 134, 11, 1);
+  $lightgolden: rgba(184, 134, 11, 0.6);
+  .goldenGradientBg {
+    background: $darkgolden;
+    background: -webkit-linear-gradient(top, $darkgolden, $lightgolden, $darkgolden);
+    background: -moz-linear-gradient(top, $darkgolden, $lightgolden, $darkgolden);
+    background: -o-linear-gradient(top, $darkgolden, $lightgolden, $darkgolden);
+    background: linear-gradient(top, $darkgolden, $lightgolden, $darkgolden);
+  }
+
+  // colore barra verde (pagamento ricevuto)
+  $darkgreen: rgba(0, 139, 7, 1);
+  $lightgreen: rgba(0, 139, 7, 0.6);
+  .greenGradientBg {
+    background: $darkgreen;
+    background: -webkit-linear-gradient(top, $darkgreen, $lightgreen, $darkgreen);
+    background: -moz-linear-gradient(top, $darkgreen, $lightgreen, $darkgreen);
+    background: -o-linear-gradient(top, $darkgreen, $lightgreen, $darkgreen);
+    background: linear-gradient(top, $darkgreen, $lightgreen, $darkgreen);
+  }
+
+  // mouse hovering su tutte le barre
+  $darkyellow: rgb(199, 188, 0);
+  $lightyellow: rgba(199, 188, 0, 0.6);
+  .grayGradientBg:hover, .redGradientBg:hover, .orangeGradientBg:hover, .goldenGradientBg:hover, .greenGradientBg:hover {
+    background: $darkyellow;
+    background: -webkit-linear-gradient(top, $darkyellow, $lightyellow, $darkyellow);
+    background: -moz-linear-gradient(top, $darkyellow, $lightyellow, $darkyellow);
+    background: -o-linear-gradient(top, $darkyellow, $lightyellow, $darkyellow);
+    background: linear-gradient(top, $darkyellow, $lightyellow, $darkyellow);
+  }
+
+
+  .label-middle {
+    font-size: 1.2em;
+  }
+
+  .label-big {
+    font-size: 1.6em;
+    font-weight: bold;
+  }
+
+  .text-85 {
+    font-size: 0.85em;
+  }
+
+  // stile per le celle del numero posti nelle prenotazioni congelate.
+  .v-table-cell-content-cell-cong {
+    color: #bbbbbb;
+  }
+
+
+}

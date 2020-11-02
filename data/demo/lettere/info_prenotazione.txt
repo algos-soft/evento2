@@ -1,0 +1,32 @@
+<img src="banner.png" height="45" width="120">
+<br>
+<p>Gentile ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},<br>
+questo è il il riepilogo della Sua opzione telefonica:</p>
+<br>
+<p>Numero prenotazione: <strong>${numeroPrenotazione}</strong></p>
+<p>Evento: <strong>${titoloEvento}</strong></p>
+<p>Quando: <strong>${dataRappresentazione} alle ore ${oraRappresentazione}</strong></p>
+<p>Dove: <strong>Sala ${nomeSala}</strong></p>
+<br>
+<p><strong>POSTI PRENOTATI:</strong></p>
+<ul>
+<li>n° ${numPostiInteri}  posti interi, al costo unitario di € ${importoIntero}</li>
+<li>n° ${numPostiRidotti}  posti ridotti, al costo unitario di € ${importoRidotto}</li>
+<li>n° ${numPostiDisabili}  posti per disabili, biglietto omaggio</li>
+<li>n° ${numPostiAccomp}  posti per accompagnatori, biglietto omaggio</li>
+</ul>
+<p><strong>TOTALE A PAGARE € ${importoTotale}</strong></p>
+<br>
+<p><strong>PER CONFERMARE LA SUA OPZIONE TELEFONICA È NECESSARIO INVIARE LA SCHEDA DI
+PRENOTAZIONE ENTRO IL ${dataScadenzaConfermaPrenotazione}.</strong></p>
+<br>
+<p>Può stampare, compilare e inviare via fax il modulo allegato, o compilarlo direttamente on-line
+cliccando all'indirizzo www.teatroascuola.it/scheda-prenotazione.
+Dopo la Sua conferma riceverà una mail con le istruzioni per il pagamento.</p>
+<p>Per maggiori informazioni può consultare il nostro sito: www.teatroascuola.it/info_scuole</p>
+<p>Coi più cordiali saluti.</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>
+[ATTACHMENTS]scheda_prenotazione.jpg

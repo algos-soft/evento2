@@ -1,0 +1,22 @@
+<p>Gentile ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},</p>
+<p>Le  confermiamo la registrazione della Sua prenotazione per l’evento <strong>${titoloEvento}</strong> del giorno ${dataRappresentazione},
+ con codice identificativo ${numeroPrenotazione}.</p>
+<p>Il codice identificativo della prenotazione andrà indicato nella causale di pagamento del corrispettivo dei biglietti,
+da effettuarsi entro i 30 gg dalla data dell’evento prenotato secondo le seguenti modalità:</p>
+<ol>
+<li><p>In contanti, recandosi al botteghino del teatro (orario: 9,00 – 18,00 dal lunedì al venerdì).</p></li>
+<li><p>Tramite vaglia postale ordinario intestato a:<br>
+Cooperativa Teatro a Scuola<br>
+P.zza Leonardo da Vinci 12<br>
+00600 Roma</p></li>
+<li><p>Tramite bonifico bancario sul seguente conto corrente:<br>
+Banca Popolare di Roma – Ag. 13<br>
+IBAN IT000000000000000000000000</p></li>
+</ol>
+ <p>È necessario indicare nella causale il numero identificativo della prenotazione, nome della scuola e numero dei biglietti.</p>
+<p><strong>RICORDIAMO DI INVIARCI COPIA DELL'AVVENUTO PAGAMENTO per la registrazione dello stesso.</strong></p>
+<p>Con i più cordiali saluti.</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>

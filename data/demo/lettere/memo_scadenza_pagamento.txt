@@ -1,0 +1,9 @@
+<p>Gentile  ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},</p>
+<p>Le ricordiamo che in data ${dataScadenzaPagamento}  scade il termine per provvedere al pagamento degli ingressi prenotati per l’evento <strong>${titoloEvento}</strong> del giorno ${dataRappresentazione}.</p>
+<p>La invitiamo a provvedere al più presto, o a ricontattare Teatro a Scuola nel caso di disdetta o altre situazioni particolari.</p>
+<p>Può trovare il regolamento e i dettagli sul pagamento sul nostro sito alla pagina www.teatroascuola.it/regolamento</p>
+<p>Ringraziando per la Sua collaborazione inviamo i più cordiali saluti.</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>

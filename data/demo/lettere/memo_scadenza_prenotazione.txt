@@ -1,0 +1,10 @@
+<p>Gentile ${titoloInsegnante} ${nomeInsegnante} ${cognomeInsegnante},</p>
+<p>Le ricordiamo che domani scade il termine per l’invio della scheda di prenotazione necessaria per confermare la Sua opzione per l’evento <strong>${titoloEvento}</strong>  del giorno ${dataRappresentazione}.</p>
+<p>Qualora non l'avesse già fatto, La invitiamo ad inviare al più presto la scheda di conferma, o a ricontattare Teatro a Scuola nel caso di situazioni particolari.</p>
+<p>Può stampare, compilare e inviare via fax il modulo allegato o compilarlo direttamente on-line alla pagina www.tratroascuola.it/scheda_prenotazione</p>
+<p>Ringraziando per la Sua collaborazione inviamo i più cordiali saluti.</p>
+<p>Lo staff di Teatro a Scuola<br>
+prenotazioni@teatroascuola.it<br>
+tel 09 12345678 - fax 09 999888564<br>
+www.teatroascuola.it</p>
+[ATTACHMENTS]scheda_prenotazione.jpg
