@@ -64,6 +64,9 @@ public class Prenotazione extends CompanyEntity {
     public static final Resource ICON_GESTIONE_MAILING = FontAwesome.ENVELOPE_O;
     public static final String CMD_EXPORT = "Esporta...";
     public static final Resource ICON_EXPORT = FontAwesome.DOWNLOAD;
+    public static final String CMD_INVIA_CONFERMA_PRENOTAZIONE = "Invia conferma prenotazione...";
+    public static final Resource ICON_INVIA_CONFERMA_PRENOTAZIONE = FontAwesome.ENVELOPE_O;
+
 
     private static final long serialVersionUID = -6685175938276422883L;
 

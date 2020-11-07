@@ -105,6 +105,16 @@ public class PrenotazioneTablePortal extends TablePortal {
             }
         });// end of anonymous class
 
+        item.addItem(Prenotazione.CMD_INVIA_CONFERMA_PRENOTAZIONE, Prenotazione.ICON_INVIA_CONFERMA_PRENOTAZIONE, new MenuBar.Command() {
+            public void menuSelected(MenuItem selectedItem) {
+                if (getTable().getSelectedEntity() != null) {
+                    getPrenotazioneTable().inviaConfermaPrenotazione();
+                } else {
+                    msgNoSelection();
+                }
+            }
+        });// end of anonymous class
+
         item.addItem(Prenotazione.CMD_ATTESTATO_PARTECIPAZIONE, Prenotazione.ICON_ATTESTATO_PARTECIPAZIONE, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
                 if (getTable().getSelectedEntity() != null) {
