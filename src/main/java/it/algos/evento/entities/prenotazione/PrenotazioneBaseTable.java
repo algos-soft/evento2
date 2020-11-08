@@ -550,26 +550,6 @@ public abstract class PrenotazioneBaseTable extends ETable {
             }
         }
 
-//        // controllo che il pagamento sia stato effettivamente ricevuto
-//        if (cont) {
-//            if (!pren.isPagamentoRicevuto()) {
-//                cont = false;
-//                Notification notification = new Notification("Il pagamento non è ancora stato ricevuto", Notification.Type.HUMANIZED_MESSAGE);
-//                notification.setDelayMsec(-1);
-//                notification.show(Page.getCurrent());
-//            }
-//        }
-
-//        // controllo che la prenotazione non sia congelata
-//        if (cont) {
-//            if (pren.isCongelata()) {
-//                cont = false;
-//                Notification notification = new Notification("Questa prenotazione è congelata", "\nNon puoi inviare la conferma di una prenotazione congelata.", Notification.Type.HUMANIZED_MESSAGE);
-//                notification.setDelayMsec(-1);
-//                notification.show(Page.getCurrent());
-//            }
-//        }
-
         // esegue
         if (cont) {
             DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma prenotazione", "Vuoi inviare la mail di conferma prenotazione?");

@@ -2,14 +2,13 @@ package it.algos.evento.entities.prenotazione;
 
 import com.vaadin.data.Property;
 import com.vaadin.server.Page;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Notification;
+import com.vaadin.ui.*;
 import it.algos.evento.entities.scuola.Scuola;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.field.CheckBoxField;
 import it.algos.webbase.web.field.EmailField;
+import it.algos.webbase.web.field.TextField;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Dialogo conferma invio email di qualsiasi tipo, relativamente a una prenotazione.
@@ -29,6 +28,7 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
     protected CheckBoxField sendScuola;
     protected EmailField mailRef;
     protected EmailField mailScuola;
+    protected EmailField mailAltro;
     private GridLayout gridLayout;
     private Component component;
 
@@ -64,10 +64,15 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
             }
         });
 
+
         mailRef = new EmailField();
         mailRef.setCaption(null);
         mailScuola = new EmailField();
         mailScuola.setCaption(null);
+
+        mailAltro = new EmailField();
+        mailAltro.setCaption(null);
+
 
         component = createUI();
         if (addPanel) {
@@ -93,7 +98,7 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
 
 
     protected Component createUI() {
-        gridLayout = new GridLayout(2, 2);
+        gridLayout = new GridLayout(2, 3);
         gridLayout.setMargin(false);
         gridLayout.setSpacing(true);
         gridLayout.addComponent(sendRef, 0, 0);
@@ -104,6 +109,13 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
         gridLayout.setComponentAlignment(sendScuola, Alignment.MIDDLE_LEFT);
         gridLayout.addComponent(mailScuola, 1, 1);
         gridLayout.setComponentAlignment(mailScuola, Alignment.MIDDLE_LEFT);
+
+        Label label = new Label("Altro destinatario");
+        gridLayout.addComponent(label, 0, 2);
+        gridLayout.setComponentAlignment(label, Alignment.MIDDLE_LEFT);
+        gridLayout.addComponent(mailAltro, 1, 2);
+        gridLayout.setComponentAlignment(mailAltro, Alignment.MIDDLE_LEFT);
+
         return gridLayout;
     }
 
@@ -168,6 +180,22 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
             }
         }
 
+        if (!mailAltro.isEmpty()) {
+            if (!mailAltro.isValid()) {
+                if (!err.equals("")) {
+                    err += "<br>";
+                }
+                err += "e-mail altro non valida";
+            }
+        }
+
+        // se nessuna destinatario specificato non puoi confermare
+        if(StringUtils.isEmpty(getDestinatari())){
+            if (!err.equals("")) {
+                err += "<br>";
+            }
+            err += "nessun destinatario specificato";
+        }
 
         if (err.equals("")) {
             super.onConfirm();
@@ -203,6 +231,14 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
                 str += mailScuola.getValue();
             }
         }
+        if (!mailAltro.isEmpty()) {
+            if (!str.equals("")) {
+                str += ", ";
+            }
+            str += mailAltro.getValue();
+        }
+
+
 
         return str;
     }
