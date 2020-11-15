@@ -11,7 +11,7 @@ import it.algos.evento.pref.CompanyPrefs;
 public class DialogoCongelaPrenotazione extends DialogoConfermaInvioManuale{
 
     public DialogoCongelaPrenotazione(Prenotazione pren, String titolo, String messaggio) {
-        super(pren, titolo, messaggio);
+        super(pren, titolo, messaggio, false);
         setConfirmButtonText("Congela");
     }
 

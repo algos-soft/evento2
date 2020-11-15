@@ -82,7 +82,8 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
 		layout.setSpacing(true);
-		layout.addComponent(creaComponenteChecks());
+		layout.addComponent(creaComponenteAzioni());
+		layout.addComponent(creaComponenteDefaults());
 		layout.addComponent(creaComponenteOpzioni());
 
 		addComponent(layout);
@@ -107,64 +108,65 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		backupEmailAddressField.setDescription("L'indirizzo al quale inviare le copie delle email in uscita");
 
 		// checks invio email
-		checkMailInfoPrenField = new CheckBoxField("Alla registrazione di una nuova prenotazione");
-		checkMailInfoPrenField.setDescription("Invia una email riepilogativa quando si registra una nuova prenotazione");
-		checkMailInfoPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				boolean b = (Boolean) checkMailInfoPrenField.getValue();
-				checkRefInfoPrenField.setVisible(b);
-				checkScuolaInfoPrenField.setVisible(b);
-				checkNPInfoPrenField.setVisible(checkRefInfoPrenField.getValue()&b);
-			}
-		});
+		checkMailInfoPrenField = new CheckBoxField("All'inserimento di una nuova opzione");
+		checkMailInfoPrenField.setDescription("Quando si registra una nuova opzione, invia una email che notifica che abbiamo acquisito l'opzione, ne riepiloga i dati al referente e lo invita a verificare/rettificare i dati ed a inviare a sua volta una conferma entro un certo tempo");
+//		checkMailInfoPrenField.addValueChangeListener(new Property.ValueChangeListener() {
+//			@Override
+//			public void valueChange(Property.ValueChangeEvent event) {
+//				boolean b = (Boolean) checkMailInfoPrenField.getValue();
+//				checkRefInfoPrenField.setVisible(b);
+//				checkScuolaInfoPrenField.setVisible(b);
+//				checkNPInfoPrenField.setVisible(checkRefInfoPrenField.getValue()&b);
+//			}
+//		});
 
-		checkMailConfPrenField= new CheckBoxField("Alla conferma prenotazione");
-		checkMailConfPrenField.setDescription("Invia una email quando si conferma una prenotazione");
-		checkMailConfPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				boolean b = (Boolean) checkMailConfPrenField.getValue();
-				checkRefConfPrenField.setVisible(b);
-				checkScuolaConfPrenField.setVisible(b);
-				checkNPConfPrenField.setVisible(checkRefConfPrenField.getValue()&b);
-			}
-		});
+		checkMailConfPrenField= new CheckBoxField("Alla conferma della prenotazione");
+		checkMailConfPrenField.setDescription("Quando si conferma una prenotazione, invia una email che notifica che la prenotazione è stata confermata, comunica i termini di pagamento e invita il referente a inviare evidenza del pagamento entro un certo tempo");
+//		checkMailConfPrenField.addValueChangeListener(new Property.ValueChangeListener() {
+//			@Override
+//			public void valueChange(Property.ValueChangeEvent event) {
+//				boolean b = (Boolean) checkMailConfPrenField.getValue();
+//				checkRefConfPrenField.setVisible(b);
+//				checkScuolaConfPrenField.setVisible(b);
+//				checkNPConfPrenField.setVisible(checkRefConfPrenField.getValue()&b);
+//			}
+//		});
 
-		checkMailConfPagaField= new CheckBoxField("Alla ricezione del pagamento");
-		checkMailConfPagaField.setDescription("Invia una email quando si riceve il pagamento");
-		checkMailConfPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				boolean b = (Boolean) checkMailConfPagaField.getValue();
-				checkRefConfPagaField.setVisible(b);
-				checkScuolaConfPagaField.setVisible(b);
-				checkNPConfPagaField.setVisible(checkRefConfPagaField.getValue()&b);
-			}
-		});
+		checkMailConfPagaField= new CheckBoxField("Alla conferma del pagamento");
+		checkMailConfPagaField.setDescription("Quando si conferma il pagamento, invia una email che notifica al referente l'avvenuta acquisizione della evidenza di pagamento");
+//		checkMailConfPagaField.addValueChangeListener(new Property.ValueChangeListener() {
+//			@Override
+//			public void valueChange(Property.ValueChangeEvent event) {
+//				boolean b = (Boolean) checkMailConfPagaField.getValue();
+//				checkRefConfPagaField.setVisible(b);
+//				checkScuolaConfPagaField.setVisible(b);
+//				checkNPConfPagaField.setVisible(checkRefConfPagaField.getValue()&b);
+//			}
+//		});
 
 		checkMailRegisPagaField= new CheckBoxField("Alla registrazione del pagamento");
-		checkMailRegisPagaField.setDescription("Invia una email quando si effettua la registrazione del pagamento");
-		checkMailRegisPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				boolean b = (Boolean) checkMailRegisPagaField.getValue();
-				checkRefRegisPagaField.setVisible(b);
-				checkScuolaRegisPagaField.setVisible(b);
-				checkNPRegisPagaField.setVisible(checkRefRegisPagaField.getValue()&b);
-			}
-		});
-		checkMailCongOpzioneField= new CheckBoxField("Quando si congela una prenotazione");
-		checkMailCongOpzioneField.setDescription("Invia una email quando si congela una prenotazione");
-		checkMailCongOpzioneField.addValueChangeListener(new Property.ValueChangeListener() {
-			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				boolean b=(Boolean)checkMailCongOpzioneField.getValue();
-				checkRefCongOpzioneField.setVisible(b);
-				checkScuolaCongOpzioneField.setVisible(b);
-				checkNPCongOpzioneField.setVisible(checkRefCongOpzioneField.getValue()&b);
-			}
-		});
+		checkMailRegisPagaField.setDescription("Quando si registra il pagamento, invia una email che notifica che il pagamento è stato effettivamente ricevuto e contabilizzato");
+//		checkMailRegisPagaField.addValueChangeListener(new Property.ValueChangeListener() {
+//			@Override
+//			public void valueChange(Property.ValueChangeEvent event) {
+//				boolean b = (Boolean) checkMailRegisPagaField.getValue();
+//				checkRefRegisPagaField.setVisible(b);
+//				checkScuolaRegisPagaField.setVisible(b);
+//				checkNPRegisPagaField.setVisible(checkRefRegisPagaField.getValue()&b);
+//			}
+//		});
+
+		checkMailCongOpzioneField= new CheckBoxField("Al congelamento di una prenotazione");
+		checkMailCongOpzioneField.setDescription("Quando si congela una prenotazione, invia una email che notifica che abbiamo congelato l'opzione e che i posti potrebbero non essere più disponibili");
+//		checkMailCongOpzioneField.addValueChangeListener(new Property.ValueChangeListener() {
+//			@Override
+//			public void valueChange(Property.ValueChangeEvent event) {
+//				boolean b=(Boolean)checkMailCongOpzioneField.getValue();
+//				checkRefCongOpzioneField.setVisible(b);
+//				checkScuolaCongOpzioneField.setVisible(b);
+//				checkNPCongOpzioneField.setVisible(checkRefCongOpzioneField.getValue()&b);
+//			}
+//		});
 
 		String tooltip;
 
@@ -307,23 +309,35 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 	}
 
+
+	private Component creaComponenteAzioni(){
+		VerticalLayout comp = new VerticalLayout();
+		comp.addComponent(new Label("<strong>Invio automatico email</strong>", ContentMode.HTML));
+		comp.addComponent(checkMailInfoPrenField);
+		comp.addComponent(checkMailConfPrenField);
+		comp.addComponent(checkMailConfPagaField);
+		comp.addComponent(checkMailRegisPagaField);
+		comp.addComponent(checkMailCongOpzioneField);
+		return comp;
+	}
+
 	
 	// Crea il GridLayout con i check boxes di abilitazione delle varie spedizioni
-	private Component creaComponenteChecks(){
+	private Component creaComponenteDefaults(){
 		Component comp;
 		GridLayout layout = new GridLayout(4,6);
 		layout.setSpacing(true);
 
 		Alignment align=Alignment.MIDDLE_LEFT;
 
-		comp = new Label("<strong>Invio automatico email</strong>", ContentMode.HTML);
+		comp = new Label("<strong>Destinatari di default</strong>", ContentMode.HTML);
 		layout.addComponent(comp, 0, 0);
 		layout.setComponentAlignment(comp, align);
-		layout.addComponent(checkMailInfoPrenField, 0, 1);
-		layout.addComponent(checkMailConfPrenField, 0, 2);
-		layout.addComponent(checkMailConfPagaField,0,3);
-		layout.addComponent(checkMailRegisPagaField,0,4);
-		layout.addComponent(checkMailCongOpzioneField,0,5);
+		layout.addComponent(new Label("Mail Riepilogo Opzione"), 0, 1);
+		layout.addComponent(new Label("Mail Conferma Prenotazione"), 0, 2);
+		layout.addComponent(new Label("Mail Conferma Pagamento"),0,3);
+		layout.addComponent(new Label("Mail Registrazione Pagamento"),0,4);
+		layout.addComponent(new Label("Mail Congelamento Prenotazione"),0,5);
 
 		comp=new Label("Alla scuola");
 		comp.setWidth("80px");

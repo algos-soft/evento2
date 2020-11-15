@@ -7,7 +7,6 @@ import it.algos.evento.entities.scuola.Scuola;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.field.CheckBoxField;
 import it.algos.webbase.web.field.EmailField;
-import it.algos.webbase.web.field.TextField;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -31,6 +30,7 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
     protected EmailField mailAltro;
     private GridLayout gridLayout;
     private Component component;
+    private boolean requireAddresses;
 
     /**
      * Costruttore.
@@ -40,12 +40,15 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
      * @param messaggio - eventuale messaggio
      * @param addPanel  - false per non inserire graficamente il pannello indirizzi nel dialogo
      *                  (in tal caso lo si potrà poi recuperare con getEmailComponent())
+     * @param requireAddresses - richiede di aver inserito almeno un indirizzo per poter confermare
      */
-    public DialogoConfermaInvioManuale(Prenotazione pren, String titolo, String messaggio, boolean addPanel) {
+    public DialogoConfermaInvioManuale(Prenotazione pren, String titolo, String messaggio, boolean addPanel, boolean requireAddresses) {
         super(null);
         this.pren = pren;
         setTitle(titolo);
         setMessage(messaggio);
+        this.requireAddresses = requireAddresses;
+
         setConfirmButtonText("Invia");
 
         sendRef = new CheckBoxField("Invia e-mail al referente");
@@ -91,10 +94,25 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
      * @param pren      - la prenotazione
      * @param titolo    - il titolo del dialogo
      * @param messaggio - eventuale messaggio
+     * @param requireAddresses - richiede di aver inserito almeno un indirizzo per poter confermare
      */
-    public DialogoConfermaInvioManuale(Prenotazione pren, String titolo, String messaggio) {
-        this(pren, titolo, messaggio, true);
+    public DialogoConfermaInvioManuale(Prenotazione pren, String titolo, String messaggio, boolean requireAddresses) {
+        this(pren, titolo, messaggio, true, requireAddresses);
     }
+
+//    /**
+//     * Costruttore.
+//     * Inserisce automaticamente il pannello indirizzi.
+//     * Consente tutti gli indirizzi vuoti
+//     *
+//     * @param pren      - la prenotazione
+//     * @param titolo    - il titolo del dialogo
+//     * @param messaggio - eventuale messaggio
+//     */
+//    public DialogoConfermaInvioManuale(Prenotazione pren, String titolo, String messaggio) {
+//        this(pren, titolo, messaggio, false);
+//    }
+
 
 
     protected Component createUI() {
@@ -189,12 +207,14 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
             }
         }
 
-        // se nessuna destinatario specificato non puoi confermare
-        if(StringUtils.isEmpty(getDestinatari())){
-            if (!err.equals("")) {
-                err += "<br>";
+        // se sono richiesti indirizzi ma non ce ne sono, non puoi confermare
+        if(requireAddresses){
+            if(StringUtils.isEmpty(getDestinatari())){
+                if (!err.equals("")) {
+                    err += "<br>";
+                }
+                err += "nessun destinatario specificato";
             }
-            err += "nessun destinatario specificato";
         }
 
         if (err.equals("")) {
@@ -257,6 +277,14 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
      */
     public Component getEmailComponent() {
         return component;
+    }
+
+    public void setCheckedReferente(boolean checked){
+        sendRef.setValue(checked);
+    }
+
+    public void setCheckedScuola(boolean checked){
+        sendScuola.setValue(checked);
     }
 
 }

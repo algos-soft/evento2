@@ -23,7 +23,7 @@ public class DialogoConfermaPrenotazione  extends DialogoConfermaInvioManuale {
     private Spedizione spedizione;
 
     public DialogoConfermaPrenotazione(Prenotazione pren, EntityManager em, Date dataConfermaDefault) {
-        super(pren, "Conferma prenotazione", "");
+        super(pren, "Conferma prenotazione", "", false);
         this.entityManager=em;
 
         setConfirmButtonText("Conferma");

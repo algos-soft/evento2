@@ -18,6 +18,7 @@ import it.algos.evento.EventoBootStrap;
 import it.algos.evento.entities.comune.Comune;
 import it.algos.evento.entities.evento.Evento;
 import it.algos.evento.entities.insegnante.Insegnante;
+import it.algos.evento.entities.lettera.ModelliLettere;
 import it.algos.evento.entities.modopagamento.ModoPagamento;
 import it.algos.evento.entities.prenotazione.eventi.TipoEventoPren;
 import it.algos.evento.entities.rappresentazione.Rappresentazione;
@@ -484,7 +485,13 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
         if (cont) {
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio riepilogo opzione con istruzioni", "Vuoi inviare il riepilogo opzione?");
+            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio riepilogo opzione con istruzioni", "Vuoi inviare il riepilogo opzione?", true);
+
+            // default selezione checkboxes
+            ModelliLettere modello=ModelliLettere.istruzioniPrenotazione;
+            dialog.setCheckedReferente(modello.isSendReferente(pren));
+            dialog.setCheckedScuola(modello.isSendScuola(pren));
+
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {
@@ -552,7 +559,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
         // esegue
         if (cont) {
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma prenotazione", "Vuoi inviare la mail di conferma prenotazione?");
+            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma prenotazione", "Vuoi inviare la mail di conferma prenotazione?", true);
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {
@@ -641,7 +648,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
         // esegue
         if (cont) {
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio attestato di partecipazione", "Vuoi inviare l'attestato di partecipazione?");
+            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio attestato di partecipazione", "Vuoi inviare l'attestato di partecipazione?", true);
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {
@@ -707,7 +714,13 @@ public abstract class PrenotazioneBaseTable extends ETable {
         // esegue
         if (cont) {
             String testo = "Invia una e-mail di sollecito e proroga la scadenza a " + CompanyPrefs.ggProlungamentoConfDopoSollecito.getInt() + " giorni da oggi.";
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma prenotazione", testo);
+            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma prenotazione", testo, true);
+
+            // default selezione checkboxes
+            ModelliLettere modello=ModelliLettere.memoScadPrenotazione;
+            dialog.setCheckedReferente(modello.isSendReferente(pren));
+            dialog.setCheckedScuola(modello.isSendScuola(pren));
+
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {
@@ -782,7 +795,13 @@ public abstract class PrenotazioneBaseTable extends ETable {
         // esegue
         if (cont) {
             String testo = "Invia una e-mail di sollecito e proroga la scadenza pagamento a " + CompanyPrefs.ggProlungamentoPagamDopoSollecito.getInt() + " giorni da oggi.";
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma pagamento", testo);
+            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma pagamento", testo, true);
+
+            // default selezione checkboxes
+            ModelliLettere modello=ModelliLettere.memoScadPagamento;
+            dialog.setCheckedReferente(modello.isSendReferente(pren));
+            dialog.setCheckedScuola(modello.isSendScuola(pren));
+
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {

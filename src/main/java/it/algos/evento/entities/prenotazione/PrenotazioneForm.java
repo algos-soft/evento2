@@ -28,6 +28,7 @@ import it.algos.evento.entities.prenotazione.PrenotazioneFormToolbar.Prenotazion
 import it.algos.evento.entities.prenotazione.eventi.EventoPrenModulo;
 import it.algos.evento.entities.prenotazione.eventi.EventoPrenTable;
 import it.algos.evento.entities.prenotazione.eventi.EventoPren_;
+import it.algos.evento.entities.prenotazione.eventi.TipoEventoPren;
 import it.algos.evento.entities.rappresentazione.Rappresentazione;
 import it.algos.evento.entities.rappresentazione.RappresentazioneModulo;
 import it.algos.evento.entities.rappresentazione.Rappresentazione_;
@@ -1157,44 +1158,68 @@ public class PrenotazioneForm extends ModuleForm {
                 Notification.show("Attenzione", "\nPosti esauriti! (" + disponibili + ")", Notification.Type.WARNING_MESSAGE);
             }
 
-            // se si tratta di nuova prenotazione, eventualmente invia email di istruzioni
+            // se si tratta di nuova prenotazione, dopo la registrazione mostra il dialogo di invio mail
             if (isNewRecord()) {
-
-                if (ModelliLettere.istruzioniPrenotazione.isSend(getPrenotazione())) {
-                    Prenotazione pren = getPrenotazione();
-
-                    // invia la mail di istruzioni in un thread separato
-                    // (usa una lambda al posto del runnable)
-                    new Thread(
-                            () -> {
-
-                                Notification notification1 = null;
-                                String detail = pren.toStringNumDataInsegnante();
-
-                                try {
-                                    PrenotazioneModulo.doInvioIstruzioni(pren, getUsername());
-                                    notification1 = new Notification("Inviata email di istruzioni", detail, Notification.Type.HUMANIZED_MESSAGE);
-                                } catch (EmailFailedException e) {
-                                    notification1 = new Notification("Invio email istruzioni fallito: " + e.getMessage(), detail, Notification.Type.ERROR_MESSAGE);
-                                } catch (Exception e) {
-                                    notification1 = new Notification("Errore durante l'invio della email di istruzioni: " + e.getMessage(), detail, Notification.Type.ERROR_MESSAGE);
-                                    e.printStackTrace();
-                                }
-                                notification1.setDelayMsec(-1);
-                                notification1.show(Page.getCurrent());
-
-                            }
-                    ).start();
-
-                }
+                showDialogSendMail();
             }
-
 
         }
 
         return saved;
 
     }
+
+
+
+
+    /**
+     * Presenta il dialogo di invio della mail.
+     * I checkboxes 'Invia al referente' e 'Invia alla scuola' sono precompilati come da preferenze.
+     * <p>
+     * Se confermato invia la mail
+     */
+    private void showDialogSendMail(){
+
+        Prenotazione pren = getPrenotazione();
+
+        DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "L'opzione è stata registrata", "Vuoi inviare la mail di riepilogo?", false);
+
+        // default selezione checkboxes
+        ModelliLettere modello=ModelliLettere.istruzioniPrenotazione;
+        dialog.setCheckedReferente(modello.isSendReferente(pren));
+        dialog.setCheckedScuola(modello.isSendScuola(pren));
+
+        dialog.setConfirmListener(d -> {
+
+            final String dests = dialog.getDestinatari();
+
+            // esegue l'operazione in un thread separato
+            // al termine dell'operazione viene visualizzata una notifica
+            new Thread(
+                    () -> {
+
+                        try {
+
+                            Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.invioIstruzioni, EventoBootStrap.getUsername(), dests);
+
+                            Notification notification = new Notification("Riepilogo opzione n. " + pren.getNumPrenotazione() + " inviato a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
+
+                        } catch (EmailFailedException e) {
+                            PrenotazioneModulo.notifyEmailFailed(e);
+                        }
+
+                    }
+
+            ).start();
+
+        });
+
+        dialog.show();
+
+    }
+
 
     /**
      * Checks if the current values are valid and ready to be persisted.
