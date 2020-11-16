@@ -85,6 +85,8 @@ public enum CompanyPrefs implements PrefIF {
     sendMailConfPagaRef("sendMailConfPagaRef", PrefType.bool, false),
     sendMailRegisPagaRef("sendMailRegisPagaRef", PrefType.bool, true),
     sendMailCongOpzioneRef("sendMailCongOpzioneRef", PrefType.bool, true),
+    sendMailAttPartRef("sendMailAttPartRef", PrefType.bool, true),
+
 
     sendMailInfoPrenScuola("sendMailInfoPrenScuola", PrefType.bool, false),
     sendMailScadPrenScuola("sendMailScadPrenScuola", PrefType.bool, false),
@@ -93,6 +95,7 @@ public enum CompanyPrefs implements PrefIF {
     sendMailConfPagaScuola("sendMailConfPagaScuola", PrefType.bool, false),
     sendMailRegisPagaScuola("sendMailRegisPagaScuola", PrefType.bool, false),
     sendMailCongOpzioneScuola("sendMailCongOpzioneScuola", PrefType.bool, false),
+    sendMailAttPartScuola("sendMailAttPartScuola", PrefType.bool, false),
 
     sendMailInfoPrenNP("sendMailInfoPrenNP", PrefType.bool, false),
     sendMailScadPrenNP("sendMailScadPrenNP", PrefType.bool, false),
@@ -100,7 +103,8 @@ public enum CompanyPrefs implements PrefIF {
     sendMailScadPagaNP("sendMailScadPagaNP", PrefType.bool, false),
     sendMailConfPagaNP("sendMailConfPagaNP", PrefType.bool, false),
     sendMailRegisPagaNP("sendMailRegisPagaNP", PrefType.bool, false),
-    sendMailCongOpzioneNP("sendMailCongOpzioneNP", PrefType.bool, false),;
+    sendMailCongOpzioneNP("sendMailCongOpzioneNP", PrefType.bool, false),
+    sendMailAttPartNP("sendMailAttPartNP", PrefType.bool, false);
 
     private String code;
     private PrefType type;
