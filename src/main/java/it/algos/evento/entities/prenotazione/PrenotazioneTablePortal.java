@@ -83,7 +83,7 @@ public class PrenotazioneTablePortal extends TablePortal {
                     msgNoSelection();
                 }
             }
-        });// end of anonymous class
+        });
 
         item.addItem(Prenotazione.CMD_MEMO_INVIO_SCHEDA_PREN, Prenotazione.ICON_MEMO_INVIO_SCHEDA_PREN, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
@@ -93,17 +93,7 @@ public class PrenotazioneTablePortal extends TablePortal {
                     msgNoSelection();
                 }
             }
-        });// end of anonymous class
-
-        item.addItem(Prenotazione.CMD_MEMO_SCAD_PAGA, Prenotazione.ICON_MEMO_SCAD_PAGA, new MenuBar.Command() {
-            public void menuSelected(MenuItem selectedItem) {
-                if (getTable().getSelectedEntity() != null) {
-                    getPrenotazioneTable().inviaPromemoriaScadenzaPagamento();
-                } else {
-                    msgNoSelection();
-                }
-            }
-        });// end of anonymous class
+        });
 
         item.addItem(Prenotazione.CMD_INVIA_CONFERMA_PRENOTAZIONE, Prenotazione.ICON_INVIA_CONFERMA_PRENOTAZIONE, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
@@ -113,7 +103,48 @@ public class PrenotazioneTablePortal extends TablePortal {
                     msgNoSelection();
                 }
             }
-        });// end of anonymous class
+        });
+
+
+        item.addItem(Prenotazione.CMD_MEMO_SCAD_PAGA, Prenotazione.ICON_MEMO_SCAD_PAGA, new MenuBar.Command() {
+            public void menuSelected(MenuItem selectedItem) {
+                if (getTable().getSelectedEntity() != null) {
+                    getPrenotazioneTable().inviaPromemoriaScadenzaPagamento();
+                } else {
+                    msgNoSelection();
+                }
+            }
+        });
+
+        item.addItem(Prenotazione.CMD_INVIA_CONFERMA_PAGA, Prenotazione.ICON_INVIA_CONFERMA_PAGA, new MenuBar.Command() {
+            public void menuSelected(MenuItem selectedItem) {
+                if (getTable().getSelectedEntity() != null) {
+                    getPrenotazioneTable().inviaConfermaPagamento();
+                } else {
+                    msgNoSelection();
+                }
+            }
+        });
+
+        item.addItem(Prenotazione.CMD_INVIA_REGIS_PAGA, Prenotazione.ICON_INVIA_REGIS_PAGA, new MenuBar.Command() {
+            public void menuSelected(MenuItem selectedItem) {
+                if (getTable().getSelectedEntity() != null) {
+                    getPrenotazioneTable().inviaConfermaRegistrazionePagamento();
+                } else {
+                    msgNoSelection();
+                }
+            }
+        });
+
+        item.addItem(Prenotazione.CMD_INVIA_AVVISO_CONGELAMENTO, Prenotazione.ICON_INVIA_AVVISO_CONGELAMENTO, new MenuBar.Command() {
+            public void menuSelected(MenuItem selectedItem) {
+                if (getTable().getSelectedEntity() != null) {
+                    getPrenotazioneTable().inviaAvvisoCongelamentoPrenotazione();
+                } else {
+                    msgNoSelection();
+                }
+            }
+        });
 
         item.addItem(Prenotazione.CMD_ATTESTATO_PARTECIPAZIONE, Prenotazione.ICON_ATTESTATO_PARTECIPAZIONE, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
@@ -123,20 +154,21 @@ public class PrenotazioneTablePortal extends TablePortal {
                     msgNoSelection();
                 }
             }
-        });// end of anonymous class
+        });
 
+        item.addSeparator();
 
         item.addItem(Prenotazione.CMD_CONFERMA_PRENOTAZIONE, Prenotazione.ICON_CONFERMA_PRENOTAZIONE, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
                 getPrenotazioneTable().confermaPrenotazione();
             }
-        });// end of anonymous class
+        });
 
         item.addItem(Prenotazione.CMD_REGISTRA_PAGAMENTO, Prenotazione.ICON_REGISTRA_PAGAMENTO, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
                 getPrenotazioneTable().registraPagamento();
             }
-        });// end of anonymous class
+        });
 
 
         item.addItem(Prenotazione.CMD_CONGELA_OPZIONE, Prenotazione.ICON_CONGELA_OPZIONE, new MenuBar.Command() {
@@ -147,7 +179,7 @@ public class PrenotazioneTablePortal extends TablePortal {
                     msgNoSelection();
                 }
             }
-        });// end of anonymous class
+        });
 
 
         item.addItem(Prenotazione.CMD_SPOSTA_AD_ALTRA_DATA, Prenotazione.ICON_SPOSTA_AD_ALTRA_DATA, new MenuBar.Command() {
@@ -159,7 +191,7 @@ public class PrenotazioneTablePortal extends TablePortal {
                     Notification.show("Seleziona prima le prenotazioni da spostare.");
                 }
             }
-        });// end of anonymous class
+        });
 
 
         item.addSeparator();

@@ -48,7 +48,7 @@ public class Prenotazione extends CompanyEntity {
     public static final Resource ICON_CONFERMA_PRENOTAZIONE = FontAwesome.THUMBS_O_UP;
     public static final String CMD_REGISTRA_PAGAMENTO = "Registra pagamento...";
     public static final Resource ICON_REGISTRA_PAGAMENTO = FontAwesome.EURO;
-    public static final String CMD_RIEPILOGO_OPZIONE = "Invia riepilogo prenotazione...";
+    public static final String CMD_RIEPILOGO_OPZIONE = "Invia riepilogo opzione...";
     public static final Resource ICON_RIEPILOGO_OPZIONE = FontAwesome.ENVELOPE_O;
     public static final String CMD_MEMO_INVIO_SCHEDA_PREN = "Invia sollecito conferma prenotazione...";
     public static final Resource ICON_MEMO_INVIO_SCHEDA_PREN = FontAwesome.ENVELOPE_O;
@@ -58,6 +58,16 @@ public class Prenotazione extends CompanyEntity {
     public static final Resource ICON_SPOSTA_AD_ALTRA_DATA = FontAwesome.ARROW_RIGHT;
     public static final String CMD_MEMO_SCAD_PAGA = "Invia sollecito conferma pagamento...";
     public static final Resource ICON_MEMO_SCAD_PAGA = FontAwesome.ENVELOPE_O;
+
+    public static final String CMD_INVIA_CONFERMA_PAGA = "Invia conferma pagamento...";
+    public static final Resource ICON_INVIA_CONFERMA_PAGA = FontAwesome.ENVELOPE_O;
+
+    public static final String CMD_INVIA_REGIS_PAGA = "Invia conferma registrazione pagamento...";
+    public static final Resource ICON_INVIA_REGIS_PAGA = FontAwesome.ENVELOPE_O;
+
+    public static final String CMD_INVIA_AVVISO_CONGELAMENTO = "Invia avviso congelamento prenotazione...";
+    public static final Resource ICON_INVIA_AVVISO_CONGELAMENTO = FontAwesome.ENVELOPE_O;
+
     public static final String CMD_ATTESTATO_PARTECIPAZIONE = "Invia attestato di partecipazione...";
     public static final Resource ICON_ATTESTATO_PARTECIPAZIONE = FontAwesome.ENVELOPE_O;
     public static final String CMD_GESTIONE_MAILING = "Crea mailing...";

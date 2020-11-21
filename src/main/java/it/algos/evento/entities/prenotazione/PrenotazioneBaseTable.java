@@ -47,23 +47,38 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
     protected final Action actConfermaPrenotazione = new Action(Prenotazione.CMD_CONFERMA_PRENOTAZIONE,
             Prenotazione.ICON_CONFERMA_PRENOTAZIONE);
+
     protected final Action actRegistraPagamento = new Action(Prenotazione.CMD_REGISTRA_PAGAMENTO,
             Prenotazione.ICON_REGISTRA_PAGAMENTO);
 
-    protected final Action actInviaConfermaPrenotazione = new Action(Prenotazione.CMD_INVIA_CONFERMA_PRENOTAZIONE,
+    protected final Action act_invia_conferma_prenotazione = new Action(Prenotazione.CMD_INVIA_CONFERMA_PRENOTAZIONE,
             Prenotazione.ICON_INVIA_CONFERMA_PRENOTAZIONE);
 
-    protected final Action actIstruzioni = new Action(Prenotazione.CMD_RIEPILOGO_OPZIONE,
+    protected final Action act_invia_info_prenotazione = new Action(Prenotazione.CMD_RIEPILOGO_OPZIONE,
             Prenotazione.ICON_RIEPILOGO_OPZIONE);
-    protected final Action actMemoInvioSchedaPren = new Action(
+
+    protected final Action act_invia_memo_scadenza_prenotazione = new Action(
             Prenotazione.CMD_MEMO_INVIO_SCHEDA_PREN,
             Prenotazione.ICON_MEMO_INVIO_SCHEDA_PREN);
-    protected final Action actMemoScadPag = new Action(Prenotazione.CMD_MEMO_SCAD_PAGA,
+
+    protected final Action act_invia_memo_scadenza_pagamento = new Action(Prenotazione.CMD_MEMO_SCAD_PAGA,
             Prenotazione.ICON_MEMO_SCAD_PAGA);
-    protected final Action actAttestatoPartecipazione = new Action(Prenotazione.CMD_ATTESTATO_PARTECIPAZIONE,
+
+    protected final Action act_invia_conferma_pagamento = new Action(Prenotazione.CMD_INVIA_CONFERMA_PAGA,
+            Prenotazione.ICON_INVIA_CONFERMA_PAGA);
+
+    protected final Action act_invia_registrazione_pagamento = new Action(Prenotazione.CMD_INVIA_REGIS_PAGA,
+            Prenotazione.ICON_INVIA_REGIS_PAGA);
+
+    protected final Action act_invia_avviso_congelamento_opzione = new Action(Prenotazione.CMD_INVIA_AVVISO_CONGELAMENTO,
+            Prenotazione.ICON_INVIA_AVVISO_CONGELAMENTO);
+
+    protected final Action act_invia_attestato_partecipazione = new Action(Prenotazione.CMD_ATTESTATO_PARTECIPAZIONE,
             Prenotazione.ICON_ATTESTATO_PARTECIPAZIONE);
-    protected final Action actAvvisoCongOpz = new Action(Prenotazione.CMD_CONGELA_OPZIONE,
+
+    protected final Action actCongelaPrenotazione = new Action(Prenotazione.CMD_CONGELA_OPZIONE,
             Prenotazione.ICON_CONGELA_OPZIONE);
+
     protected final Action actSpostaAdAltraData = new Action(Prenotazione.CMD_SPOSTA_AD_ALTRA_DATA,
             Prenotazione.ICON_SPOSTA_AD_ALTRA_DATA);
 
@@ -843,6 +858,33 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
     /**
+     * Invio email conferma pagamento
+     * <p>
+     * Invocato dai menu
+     */
+    public void inviaConfermaPagamento() {
+        Notification.show("Invio email conferma pagamento - da implementare");
+    }
+
+    /**
+     * Invio email conferma registrazione pagamento
+     * <p>
+     * Invocato dai menu
+     */
+    public void inviaConfermaRegistrazionePagamento() {
+        Notification.show("Invio email conferma registrazione pagamento - da implementare");
+    }
+
+    /**
+     * Invio email avviso congelamento prenotazione
+     * <p>
+     * Invocato dai menu
+     */
+    public void inviaAvvisoCongelamentoPrenotazione() {
+        Notification.show("Invio email avviso congelamento prenotazione - da implementare");
+    }
+
+    /**
      * Congelamento prenotazione
      * <p>
      * Invocato dalla UI
@@ -1018,14 +1060,18 @@ public abstract class PrenotazioneBaseTable extends ETable {
         }
 
 
-        aActions.add(actIstruzioni);
-        aActions.add(actMemoInvioSchedaPren);
-        aActions.add(actMemoScadPag);
-        aActions.add(actInviaConfermaPrenotazione);
-        aActions.add(actAttestatoPartecipazione);
+        aActions.add(act_invia_info_prenotazione);
+        aActions.add(act_invia_memo_scadenza_prenotazione);
+        aActions.add(act_invia_conferma_prenotazione);
+        aActions.add(act_invia_memo_scadenza_pagamento);
+        aActions.add(act_invia_conferma_pagamento);
+        aActions.add(act_invia_registrazione_pagamento);
+        aActions.add(act_invia_avviso_congelamento_opzione);
+        aActions.add(act_invia_attestato_partecipazione);
+        //====
         aActions.add(actConfermaPrenotazione);
         aActions.add(actRegistraPagamento);
-        aActions.add(actAvvisoCongOpz);
+        aActions.add(actCongelaPrenotazione);
         aActions.add(actSpostaAdAltraData);
 
         return aActions.toArray(new Action[0]);
@@ -1061,15 +1107,46 @@ public abstract class PrenotazioneBaseTable extends ETable {
                     registraPagamento();
                 }
 
-                if (action.equals(actIstruzioni)) {
+                //====
+
+                if (action.equals(act_invia_info_prenotazione)) {
                     inviaRiepilogoPrenotazione();
                 }
 
-                if (action.equals(actMemoInvioSchedaPren)) {
+                if (action.equals(act_invia_memo_scadenza_prenotazione)) {
                     inviaMemoConfermaPren();
                 }
 
-                if (action.equals(actAvvisoCongOpz)) {
+                if (action.equals(act_invia_conferma_prenotazione)) {
+                    inviaConfermaPrenotazione();
+                }
+
+
+                if (action.equals(act_invia_memo_scadenza_pagamento)) {
+                    inviaPromemoriaScadenzaPagamento();
+                }
+
+
+                if (action.equals(act_invia_conferma_pagamento)) {
+                    inviaConfermaPagamento();
+                }
+
+                if (action.equals(act_invia_registrazione_pagamento)) {
+                    inviaConfermaRegistrazionePagamento();
+                }
+
+                if (action.equals(act_invia_avviso_congelamento_opzione)) {
+                    inviaAvvisoCongelamentoPrenotazione();
+                }
+
+
+                if (action.equals(act_invia_attestato_partecipazione)) {
+                    inviaAttestatoPartecipazione();
+                }
+
+                //====
+
+                if (action.equals(actCongelaPrenotazione)) {
                     congelaPrenotazione();
                 }
 
@@ -1077,17 +1154,6 @@ public abstract class PrenotazioneBaseTable extends ETable {
                     spostaAdAltraData();
                 }
 
-                if (action.equals(actMemoScadPag)) {
-                    inviaPromemoriaScadenzaPagamento();
-                }
-
-                if (action.equals(actInviaConfermaPrenotazione)) {
-                    inviaConfermaPrenotazione();
-                }
-
-                if (action.equals(actAttestatoPartecipazione)) {
-                    inviaAttestatoPartecipazione();
-                }
 
 
             }
