@@ -25,7 +25,9 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 
 	private static final String KEY_REF_MAIL_INFO_PREN = "checkRefInfoPren";
+	private static final String KEY_REF_MAIL_SCAD_PREN = "checkRefScadPren";
 	private static final String KEY_REF_MAIL_CONF_PREN = "checkRefConfPren";
+	private static final String KEY_REF_MAIL_SCAD_PAGA = "checkRefScadPaga";
 	private static final String KEY_REF_MAIL_CONF_PAGA = "checkRefConfPaga";
 	private static final String KEY_REF_MAIL_REGIS_PAGA = "checkRefRegisPaga";
 	private static final String KEY_REF_MAIL_CONG_OPZ = "checkRefCongOpzione";
@@ -33,7 +35,9 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 
 	private static final String KEY_SCUOLA_MAIL_INFO_PREN = "checkScuolaInfoPren";
+	private static final String KEY_SCUOLA_MAIL_SCAD_PREN = "checkScuolaSCADPren";
 	private static final String KEY_SCUOLA_MAIL_CONF_PREN = "checkScuolaConfPren";
+	private static final String KEY_SCUOLA_MAIL_SCAD_PAGA = "checkScuolaScadPaga";
 	private static final String KEY_SCUOLA_MAIL_CONF_PAGA = "checkScuolaConfPaga";
 	private static final String KEY_SCUOLA_MAIL_REGIS_PAGA = "checkScuolaRegisPaga";
 	private static final String KEY_SCUOLA_MAIL_CONG_OPZ = "checkScuolaCongOpzione";
@@ -41,7 +45,9 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 
 	private static final String KEY_NP_MAIL_INFO_PREN = "checkNPInfoPren";
+	private static final String KEY_NP_MAIL_SCAD_PREN = "checkNPScadPren";
 	private static final String KEY_NP_MAIL_CONF_PREN = "checkNPConfPren";
+	private static final String KEY_NP_MAIL_SCAD_PAGA = "checkNPScadPaga";
 	private static final String KEY_NP_MAIL_CONF_PAGA = "checkNPConfPaga";
 	private static final String KEY_NP_MAIL_REGIS_PAGA = "checkNPRegisPaga";
 	private static final String KEY_NP_MAIL_CONG_OPZ = "checkNPCongOpzione";
@@ -58,7 +64,9 @@ public class EmailConfigComponent extends BaseConfigPanel {
 	private CheckBoxField checkMailCongOpzioneField;
 
 	private CheckBoxField checkRefInfoPrenField;
+	private CheckBoxField checkRefScadPrenField;
 	private CheckBoxField checkRefConfPrenField;
+	private CheckBoxField checkRefScadPagaField;
 	private CheckBoxField checkRefConfPagaField;
 	private CheckBoxField checkRefRegisPagaField;
 	private CheckBoxField checkRefCongOpzioneField;
@@ -66,14 +74,18 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 
 	private CheckBoxField checkScuolaInfoPrenField;
+	private CheckBoxField checkScuolaScadPrenField;
 	private CheckBoxField checkScuolaConfPrenField;
+	private CheckBoxField checkScuolaScadPagaField;
 	private CheckBoxField checkScuolaConfPagaField;
 	private CheckBoxField checkScuolaRegisPagaField;
 	private CheckBoxField checkScuolaCongOpzioneField;
 	private CheckBoxField checkScuolaAttPartField;
 
 	private CheckBoxField checkNPInfoPrenField;
+	private CheckBoxField checkNPScadPrenField;
 	private CheckBoxField checkNPConfPrenField;
+	private CheckBoxField checkNPScadPagaField;
 	private CheckBoxField checkNPConfPagaField;
 	private CheckBoxField checkNPRegisPagaField;
 	private CheckBoxField checkNPCongOpzioneField;
@@ -120,63 +132,18 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		// checks invio email
 		checkMailInfoPrenField = new CheckBoxField("All'inserimento di una nuova opzione");
 		checkMailInfoPrenField.setDescription("Quando si registra una nuova opzione, invia una email che notifica che abbiamo acquisito l'opzione, ne riepiloga i dati al referente e lo invita a verificare/rettificare i dati ed a inviare a sua volta una conferma entro un certo tempo");
-//		checkMailInfoPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkMailInfoPrenField.getValue();
-//				checkRefInfoPrenField.setVisible(b);
-//				checkScuolaInfoPrenField.setVisible(b);
-//				checkNPInfoPrenField.setVisible(checkRefInfoPrenField.getValue()&b);
-//			}
-//		});
 
 		checkMailConfPrenField= new CheckBoxField("Alla conferma della prenotazione");
 		checkMailConfPrenField.setDescription("Quando si conferma una prenotazione, invia una email che notifica che la prenotazione è stata confermata, comunica i termini di pagamento e invita il referente a inviare evidenza del pagamento entro un certo tempo");
-//		checkMailConfPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkMailConfPrenField.getValue();
-//				checkRefConfPrenField.setVisible(b);
-//				checkScuolaConfPrenField.setVisible(b);
-//				checkNPConfPrenField.setVisible(checkRefConfPrenField.getValue()&b);
-//			}
-//		});
 
 		checkMailConfPagaField= new CheckBoxField("Alla conferma del pagamento");
 		checkMailConfPagaField.setDescription("Quando si conferma il pagamento, invia una email che notifica al referente l'avvenuta acquisizione della evidenza di pagamento");
-//		checkMailConfPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkMailConfPagaField.getValue();
-//				checkRefConfPagaField.setVisible(b);
-//				checkScuolaConfPagaField.setVisible(b);
-//				checkNPConfPagaField.setVisible(checkRefConfPagaField.getValue()&b);
-//			}
-//		});
 
 		checkMailRegisPagaField= new CheckBoxField("Alla registrazione del pagamento");
 		checkMailRegisPagaField.setDescription("Quando si registra il pagamento, invia una email che notifica che il pagamento è stato effettivamente ricevuto e contabilizzato");
-//		checkMailRegisPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkMailRegisPagaField.getValue();
-//				checkRefRegisPagaField.setVisible(b);
-//				checkScuolaRegisPagaField.setVisible(b);
-//				checkNPRegisPagaField.setVisible(checkRefRegisPagaField.getValue()&b);
-//			}
-//		});
 
 		checkMailCongOpzioneField= new CheckBoxField("Al congelamento di una prenotazione");
 		checkMailCongOpzioneField.setDescription("Quando si congela una prenotazione, invia una email che notifica che abbiamo congelato l'opzione e che i posti potrebbero non essere più disponibili");
-//		checkMailCongOpzioneField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b=(Boolean)checkMailCongOpzioneField.getValue();
-//				checkRefCongOpzioneField.setVisible(b);
-//				checkScuolaCongOpzioneField.setVisible(b);
-//				checkNPCongOpzioneField.setVisible(checkRefCongOpzioneField.getValue()&b);
-//			}
-//		});
 
 		String tooltip;
 
@@ -185,8 +152,12 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		tooltip="Invia la mail alla scuola";
 		checkScuolaInfoPrenField= new CheckBoxField();
 		checkScuolaInfoPrenField.setDescription(tooltip);
+		checkScuolaScadPrenField= new CheckBoxField();
+		checkScuolaScadPrenField.setDescription(tooltip);
 		checkScuolaConfPrenField= new CheckBoxField();
 		checkScuolaConfPrenField.setDescription(tooltip);
+		checkScuolaScadPagaField= new CheckBoxField();
+		checkScuolaScadPagaField.setDescription(tooltip);
 		checkScuolaConfPagaField= new CheckBoxField();
 		checkScuolaConfPagaField.setDescription(tooltip);
 		checkScuolaRegisPagaField= new CheckBoxField();
@@ -201,53 +172,24 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		tooltip="Invia la mail al referente";
 		checkRefInfoPrenField= new CheckBoxField();
 		checkRefInfoPrenField.setDescription(tooltip);
-//		checkRefInfoPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkRefInfoPrenField.getValue();
-//				checkNPInfoPrenField.setVisible(b);
-//			}
-//		});
+
+		checkRefScadPrenField= new CheckBoxField();
+		checkRefScadPrenField.setDescription(tooltip);
 
 		checkRefConfPrenField= new CheckBoxField();
 		checkRefConfPrenField.setDescription(tooltip);
-//		checkRefConfPrenField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkRefConfPrenField.getValue();
-//				checkNPConfPrenField.setVisible(b);
-//			}
-//		});
+
+		checkRefScadPagaField= new CheckBoxField();
+		checkRefScadPagaField.setDescription(tooltip);
 
 		checkRefConfPagaField= new CheckBoxField();
 		checkRefConfPagaField.setDescription(tooltip);
-//		checkRefConfPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkRefConfPagaField.getValue();
-//				checkNPConfPagaField.setVisible(b);
-//			}
-//		});
 
 		checkRefRegisPagaField= new CheckBoxField();
 		checkRefRegisPagaField.setDescription(tooltip);
-//		checkRefRegisPagaField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkRefRegisPagaField.getValue();
-//				checkNPRegisPagaField.setVisible(b);
-//			}
-//		});
 
 		checkRefCongOpzioneField= new CheckBoxField();
 		checkRefCongOpzioneField.setDescription(tooltip);
-//		checkRefCongOpzioneField.addValueChangeListener(new Property.ValueChangeListener() {
-//			@Override
-//			public void valueChange(Property.ValueChangeEvent event) {
-//				boolean b = (Boolean) checkRefCongOpzioneField.getValue();
-//				checkNPCongOpzioneField.setVisible(b);
-//			}
-//		});
 
 		checkRefAttPartField= new CheckBoxField();
 		checkRefAttPartField.setDescription(tooltip);
@@ -259,8 +201,12 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		tooltip="Non invia la mail se si tratta di un privato";
 		checkNPInfoPrenField= new CheckBoxField();
 		checkNPInfoPrenField.setDescription(tooltip);
+		checkNPScadPrenField= new CheckBoxField();
+		checkNPScadPrenField.setDescription(tooltip);
 		checkNPConfPrenField= new CheckBoxField();
 		checkNPConfPrenField.setDescription(tooltip);
+		checkNPScadPagaField= new CheckBoxField();
+		checkNPScadPagaField.setDescription(tooltip);
 		checkNPConfPagaField= new CheckBoxField();
 		checkNPConfPagaField.setDescription(tooltip);
 		checkNPRegisPagaField= new CheckBoxField();
@@ -284,21 +230,27 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		getGroup().bind(checkMailCongOpzioneField, KEY_CHECK_MAIL_CONG_OPZ);
 
 		getGroup().bind(checkRefInfoPrenField, KEY_REF_MAIL_INFO_PREN);
+		getGroup().bind(checkRefScadPrenField, KEY_REF_MAIL_SCAD_PREN);
 		getGroup().bind(checkRefConfPrenField, KEY_REF_MAIL_CONF_PREN);
+		getGroup().bind(checkRefScadPagaField, KEY_REF_MAIL_SCAD_PAGA);
 		getGroup().bind(checkRefConfPagaField, KEY_REF_MAIL_CONF_PAGA);
 		getGroup().bind(checkRefRegisPagaField, KEY_REF_MAIL_REGIS_PAGA);
 		getGroup().bind(checkRefCongOpzioneField, KEY_REF_MAIL_CONG_OPZ);
 		getGroup().bind(checkRefAttPartField, KEY_REF_MAIL_ATT_PART);
 
 		getGroup().bind(checkScuolaInfoPrenField, KEY_SCUOLA_MAIL_INFO_PREN);
+		getGroup().bind(checkScuolaScadPrenField, KEY_SCUOLA_MAIL_SCAD_PREN);
 		getGroup().bind(checkScuolaConfPrenField, KEY_SCUOLA_MAIL_CONF_PREN);
+		getGroup().bind(checkScuolaScadPagaField, KEY_SCUOLA_MAIL_SCAD_PAGA);
 		getGroup().bind(checkScuolaConfPagaField, KEY_SCUOLA_MAIL_CONF_PAGA);
 		getGroup().bind(checkScuolaRegisPagaField, KEY_SCUOLA_MAIL_REGIS_PAGA);
 		getGroup().bind(checkScuolaCongOpzioneField, KEY_SCUOLA_MAIL_CONG_OPZ);
 		getGroup().bind(checkScuolaAttPartField, KEY_SCUOLA_MAIL_ATT_PART);
 
 		getGroup().bind(checkNPInfoPrenField, KEY_NP_MAIL_INFO_PREN);
+		getGroup().bind(checkNPScadPrenField, KEY_NP_MAIL_SCAD_PREN);
 		getGroup().bind(checkNPConfPrenField, KEY_NP_MAIL_CONF_PREN);
+		getGroup().bind(checkNPScadPagaField, KEY_NP_MAIL_SCAD_PAGA);
 		getGroup().bind(checkNPConfPagaField, KEY_NP_MAIL_CONF_PAGA);
 		getGroup().bind(checkNPRegisPagaField, KEY_NP_MAIL_REGIS_PAGA);
 		getGroup().bind(checkNPCongOpzioneField, KEY_NP_MAIL_CONG_OPZ);
@@ -347,7 +299,7 @@ public class EmailConfigComponent extends BaseConfigPanel {
 	// Crea il GridLayout con i check boxes di abilitazione delle varie spedizioni
 	private Component creaComponenteDefaults(){
 		Component comp;
-		GridLayout layout = new GridLayout(4,7);
+		GridLayout layout = new GridLayout(4,9);
 		layout.setSpacing(true);
 
 		Alignment align=Alignment.MIDDLE_LEFT;
@@ -356,11 +308,13 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.addComponent(comp, 0, 0);
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(new Label("Mail Riepilogo Opzione"), 0, 1);
-		layout.addComponent(new Label("Mail Conferma Prenotazione"), 0, 2);
-		layout.addComponent(new Label("Mail Conferma Pagamento"),0,3);
-		layout.addComponent(new Label("Mail Registrazione Pagamento"),0,4);
-		layout.addComponent(new Label("Mail Congelamento Prenotazione"),0,5);
-		layout.addComponent(new Label("Mail Attestato Partecipazione"),0,6);
+		layout.addComponent(new Label("Mail Sollecito Conferma Prenotazione"), 0, 2);
+		layout.addComponent(new Label("Mail Conferma Prenotazione"), 0, 3);
+		layout.addComponent(new Label("Mail Sollecito Conferma Pagamento"),0,4);
+		layout.addComponent(new Label("Mail Conferma Pagamento"),0,5);
+		layout.addComponent(new Label("Mail Registrazione Pagamento"),0,6);
+		layout.addComponent(new Label("Mail Congelamento Prenotazione"),0,7);
+		layout.addComponent(new Label("Mail Attestato Partecipazione"),0,8);
 
 		comp=new Label("Alla scuola");
 		comp.setWidth("80px");
@@ -368,15 +322,19 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkScuolaInfoPrenField, 1, 1);
 		layout.setComponentAlignment(checkScuolaInfoPrenField, align);
-		layout.addComponent(checkScuolaConfPrenField, 1, 2);
+		layout.addComponent(checkScuolaScadPrenField, 1, 2);
+		layout.setComponentAlignment(checkScuolaScadPrenField, align);
+		layout.addComponent(checkScuolaConfPrenField, 1, 3);
 		layout.setComponentAlignment(checkScuolaConfPrenField, align);
-		layout.addComponent(checkScuolaConfPagaField, 1, 3);
+		layout.addComponent(checkScuolaScadPagaField, 1, 4);
+		layout.setComponentAlignment(checkScuolaScadPagaField, align);
+		layout.addComponent(checkScuolaConfPagaField, 1, 5);
 		layout.setComponentAlignment(checkScuolaConfPagaField, align);
-		layout.addComponent(checkScuolaRegisPagaField, 1, 4);
+		layout.addComponent(checkScuolaRegisPagaField, 1, 6);
 		layout.setComponentAlignment(checkScuolaRegisPagaField, align);
-		layout.addComponent(checkScuolaCongOpzioneField, 1, 5);
+		layout.addComponent(checkScuolaCongOpzioneField, 1, 7);
 		layout.setComponentAlignment(checkScuolaCongOpzioneField, align);
-		layout.addComponent(checkScuolaAttPartField, 1, 6);
+		layout.addComponent(checkScuolaAttPartField, 1, 8);
 		layout.setComponentAlignment(checkScuolaAttPartField, align);
 
 
@@ -386,15 +344,19 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkRefInfoPrenField, 2, 1);
 		layout.setComponentAlignment(checkRefInfoPrenField, align);
-		layout.addComponent(checkRefConfPrenField, 2, 2);
+		layout.addComponent(checkRefScadPrenField, 2, 2);
+		layout.setComponentAlignment(checkRefScadPrenField, align);
+		layout.addComponent(checkRefConfPrenField, 2, 3);
 		layout.setComponentAlignment(checkRefConfPrenField, align);
-		layout.addComponent(checkRefConfPagaField, 2, 3);
+		layout.addComponent(checkRefScadPagaField, 2, 4);
+		layout.setComponentAlignment(checkRefScadPagaField, align);
+		layout.addComponent(checkRefConfPagaField, 2, 5);
 		layout.setComponentAlignment(checkRefConfPagaField, align);
-		layout.addComponent(checkRefRegisPagaField, 2, 4);
+		layout.addComponent(checkRefRegisPagaField, 2, 6);
 		layout.setComponentAlignment(checkRefRegisPagaField, align);
-		layout.addComponent(checkRefCongOpzioneField, 2, 5);
+		layout.addComponent(checkRefCongOpzioneField, 2, 7);
 		layout.setComponentAlignment(checkRefCongOpzioneField, align);
-		layout.addComponent(checkRefAttPartField, 2, 6);
+		layout.addComponent(checkRefAttPartField, 2, 8);
 		layout.setComponentAlignment(checkRefAttPartField, align);
 
 
@@ -404,15 +366,19 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkNPInfoPrenField, 3, 1);
 		layout.setComponentAlignment(checkNPInfoPrenField, align);
-		layout.addComponent(checkNPConfPrenField, 3, 2);
+		layout.addComponent(checkNPScadPrenField, 3, 2);
+		layout.setComponentAlignment(checkNPScadPrenField, align);
+		layout.addComponent(checkNPConfPrenField, 3, 3);
 		layout.setComponentAlignment(checkNPConfPrenField, align);
-		layout.addComponent(checkNPConfPagaField, 3, 3);
+		layout.addComponent(checkNPScadPagaField, 3, 4);
+		layout.setComponentAlignment(checkNPScadPagaField, align);
+		layout.addComponent(checkNPConfPagaField, 3, 5);
 		layout.setComponentAlignment(checkNPConfPagaField, align);
-		layout.addComponent(checkNPRegisPagaField, 3, 4);
+		layout.addComponent(checkNPRegisPagaField, 3, 6);
 		layout.setComponentAlignment(checkNPRegisPagaField, align);
-		layout.addComponent(checkNPCongOpzioneField, 3, 5);
+		layout.addComponent(checkNPCongOpzioneField, 3, 7);
 		layout.setComponentAlignment(checkNPCongOpzioneField, align);
-		layout.addComponent(checkNPAttPartField, 3, 6);
+		layout.addComponent(checkNPAttPartField, 3, 8);
 		layout.setComponentAlignment(checkNPAttPartField, align);
 
 
@@ -453,21 +419,27 @@ public class EmailConfigComponent extends BaseConfigPanel {
 			addItemProperty(KEY_CHECK_MAIL_CONG_OPZ, new ObjectProperty<Boolean>(CompanyPrefs.sendMailCongOpzione.getBool()));
 
 			addItemProperty(KEY_REF_MAIL_INFO_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailInfoPrenRef.getBool()));
+			addItemProperty(KEY_REF_MAIL_SCAD_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPrenRef.getBool()));
 			addItemProperty(KEY_REF_MAIL_CONF_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPrenRef.getBool()));
+			addItemProperty(KEY_REF_MAIL_SCAD_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPagaRef.getBool()));
 			addItemProperty(KEY_REF_MAIL_CONF_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPagaRef.getBool()));
 			addItemProperty(KEY_REF_MAIL_REGIS_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailRegisPagaRef.getBool()));
 			addItemProperty(KEY_REF_MAIL_CONG_OPZ, new ObjectProperty<Boolean>(CompanyPrefs.sendMailCongOpzioneRef.getBool()));
 			addItemProperty(KEY_REF_MAIL_ATT_PART, new ObjectProperty<Boolean>(CompanyPrefs.sendMailAttPartRef.getBool()));
 
 			addItemProperty(KEY_SCUOLA_MAIL_INFO_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailInfoPrenScuola.getBool()));
+			addItemProperty(KEY_SCUOLA_MAIL_SCAD_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPrenScuola.getBool()));
 			addItemProperty(KEY_SCUOLA_MAIL_CONF_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPrenScuola.getBool()));
+			addItemProperty(KEY_SCUOLA_MAIL_SCAD_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPagaScuola.getBool()));
 			addItemProperty(KEY_SCUOLA_MAIL_CONF_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPagaScuola.getBool()));
 			addItemProperty(KEY_SCUOLA_MAIL_REGIS_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailRegisPagaScuola.getBool()));
 			addItemProperty(KEY_SCUOLA_MAIL_CONG_OPZ, new ObjectProperty<Boolean>(CompanyPrefs.sendMailCongOpzioneScuola.getBool()));
 			addItemProperty(KEY_SCUOLA_MAIL_ATT_PART, new ObjectProperty<Boolean>(CompanyPrefs.sendMailAttPartScuola.getBool()));
 
 			addItemProperty(KEY_NP_MAIL_INFO_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailInfoPrenNP.getBool()));
+			addItemProperty(KEY_NP_MAIL_SCAD_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPrenNP.getBool()));
 			addItemProperty(KEY_NP_MAIL_CONF_PREN, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPrenNP.getBool()));
+			addItemProperty(KEY_NP_MAIL_SCAD_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailScadPagaNP.getBool()));
 			addItemProperty(KEY_NP_MAIL_CONF_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailConfPagaNP.getBool()));
 			addItemProperty(KEY_NP_MAIL_REGIS_PAGA, new ObjectProperty<Boolean>(CompanyPrefs.sendMailRegisPagaNP.getBool()));
 			addItemProperty(KEY_NP_MAIL_CONG_OPZ, new ObjectProperty<Boolean>(CompanyPrefs.sendMailCongOpzioneNP.getBool()));
@@ -509,12 +481,14 @@ public class EmailConfigComponent extends BaseConfigPanel {
 				CompanyPrefs.sendMailRegisPaga.put(obj);
 				obj = getItemProperty(KEY_CHECK_MAIL_CONG_OPZ).getValue();
 				CompanyPrefs.sendMailCongOpzione.put(obj);
-
-
 				obj = getItemProperty(KEY_REF_MAIL_INFO_PREN).getValue();
 				CompanyPrefs.sendMailInfoPrenRef.put(obj);
+				obj = getItemProperty(KEY_REF_MAIL_SCAD_PREN).getValue();
+				CompanyPrefs.sendMailScadPrenRef.put(obj);
 				obj = getItemProperty(KEY_REF_MAIL_CONF_PREN).getValue();
 				CompanyPrefs.sendMailConfPrenRef.put(obj);
+				obj = getItemProperty(KEY_REF_MAIL_SCAD_PAGA).getValue();
+				CompanyPrefs.sendMailScadPagaRef.put(obj);
 				obj = getItemProperty(KEY_REF_MAIL_CONF_PAGA).getValue();
 				CompanyPrefs.sendMailConfPagaRef.put(obj);
 				obj = getItemProperty(KEY_REF_MAIL_REGIS_PAGA).getValue();
@@ -527,8 +501,12 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 				obj = getItemProperty(KEY_SCUOLA_MAIL_INFO_PREN).getValue();
 				CompanyPrefs.sendMailInfoPrenScuola.put(obj);
+				obj = getItemProperty(KEY_SCUOLA_MAIL_SCAD_PREN).getValue();
+				CompanyPrefs.sendMailScadPrenScuola.put(obj);
 				obj = getItemProperty(KEY_SCUOLA_MAIL_CONF_PREN).getValue();
 				CompanyPrefs.sendMailConfPrenScuola.put(obj);
+				obj = getItemProperty(KEY_SCUOLA_MAIL_SCAD_PAGA).getValue();
+				CompanyPrefs.sendMailScadPagaScuola.put(obj);
 				obj = getItemProperty(KEY_SCUOLA_MAIL_CONF_PAGA).getValue();
 				CompanyPrefs.sendMailConfPagaScuola.put(obj);
 				obj = getItemProperty(KEY_SCUOLA_MAIL_REGIS_PAGA).getValue();
@@ -541,6 +519,8 @@ public class EmailConfigComponent extends BaseConfigPanel {
 
 				obj = getItemProperty(KEY_NP_MAIL_INFO_PREN).getValue();
 				CompanyPrefs.sendMailInfoPrenNP.put(obj);
+				obj = getItemProperty(KEY_NP_MAIL_SCAD_PREN).getValue();
+				CompanyPrefs.sendMailScadPrenNP.put(obj);
 				obj = getItemProperty(KEY_NP_MAIL_CONF_PREN).getValue();
 				CompanyPrefs.sendMailConfPrenNP.put(obj);
 				obj = getItemProperty(KEY_NP_MAIL_CONF_PAGA).getValue();
