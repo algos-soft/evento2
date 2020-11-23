@@ -201,18 +201,25 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		tooltip="Non invia la mail se si tratta di un privato";
 		checkNPInfoPrenField= new CheckBoxField();
 		checkNPInfoPrenField.setDescription(tooltip);
+
 		checkNPScadPrenField= new CheckBoxField();
 		checkNPScadPrenField.setDescription(tooltip);
+
 		checkNPConfPrenField= new CheckBoxField();
 		checkNPConfPrenField.setDescription(tooltip);
+
 		checkNPScadPagaField= new CheckBoxField();
 		checkNPScadPagaField.setDescription(tooltip);
+
 		checkNPConfPagaField= new CheckBoxField();
 		checkNPConfPagaField.setDescription(tooltip);
+
 		checkNPRegisPagaField= new CheckBoxField();
 		checkNPRegisPagaField.setDescription(tooltip);
+
 		checkNPCongOpzioneField= new CheckBoxField();
 		checkNPCongOpzioneField.setDescription(tooltip);
+
 		checkNPAttPartField= new CheckBoxField();
 		checkNPAttPartField.setDescription(tooltip);
 
@@ -322,18 +329,25 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkScuolaInfoPrenField, 1, 1);
 		layout.setComponentAlignment(checkScuolaInfoPrenField, align);
+
 		layout.addComponent(checkScuolaScadPrenField, 1, 2);
 		layout.setComponentAlignment(checkScuolaScadPrenField, align);
+
 		layout.addComponent(checkScuolaConfPrenField, 1, 3);
 		layout.setComponentAlignment(checkScuolaConfPrenField, align);
+
 		layout.addComponent(checkScuolaScadPagaField, 1, 4);
 		layout.setComponentAlignment(checkScuolaScadPagaField, align);
+
 		layout.addComponent(checkScuolaConfPagaField, 1, 5);
 		layout.setComponentAlignment(checkScuolaConfPagaField, align);
+
 		layout.addComponent(checkScuolaRegisPagaField, 1, 6);
 		layout.setComponentAlignment(checkScuolaRegisPagaField, align);
+
 		layout.addComponent(checkScuolaCongOpzioneField, 1, 7);
 		layout.setComponentAlignment(checkScuolaCongOpzioneField, align);
+
 		layout.addComponent(checkScuolaAttPartField, 1, 8);
 		layout.setComponentAlignment(checkScuolaAttPartField, align);
 
@@ -344,18 +358,25 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkRefInfoPrenField, 2, 1);
 		layout.setComponentAlignment(checkRefInfoPrenField, align);
+
 		layout.addComponent(checkRefScadPrenField, 2, 2);
 		layout.setComponentAlignment(checkRefScadPrenField, align);
+
 		layout.addComponent(checkRefConfPrenField, 2, 3);
 		layout.setComponentAlignment(checkRefConfPrenField, align);
+
 		layout.addComponent(checkRefScadPagaField, 2, 4);
 		layout.setComponentAlignment(checkRefScadPagaField, align);
+
 		layout.addComponent(checkRefConfPagaField, 2, 5);
 		layout.setComponentAlignment(checkRefConfPagaField, align);
+
 		layout.addComponent(checkRefRegisPagaField, 2, 6);
 		layout.setComponentAlignment(checkRefRegisPagaField, align);
+
 		layout.addComponent(checkRefCongOpzioneField, 2, 7);
 		layout.setComponentAlignment(checkRefCongOpzioneField, align);
+
 		layout.addComponent(checkRefAttPartField, 2, 8);
 		layout.setComponentAlignment(checkRefAttPartField, align);
 
@@ -366,18 +387,25 @@ public class EmailConfigComponent extends BaseConfigPanel {
 		layout.setComponentAlignment(comp, align);
 		layout.addComponent(checkNPInfoPrenField, 3, 1);
 		layout.setComponentAlignment(checkNPInfoPrenField, align);
+
 		layout.addComponent(checkNPScadPrenField, 3, 2);
 		layout.setComponentAlignment(checkNPScadPrenField, align);
+
 		layout.addComponent(checkNPConfPrenField, 3, 3);
 		layout.setComponentAlignment(checkNPConfPrenField, align);
+
 		layout.addComponent(checkNPScadPagaField, 3, 4);
 		layout.setComponentAlignment(checkNPScadPagaField, align);
+
 		layout.addComponent(checkNPConfPagaField, 3, 5);
 		layout.setComponentAlignment(checkNPConfPagaField, align);
+
 		layout.addComponent(checkNPRegisPagaField, 3, 6);
 		layout.setComponentAlignment(checkNPRegisPagaField, align);
+
 		layout.addComponent(checkNPCongOpzioneField, 3, 7);
 		layout.setComponentAlignment(checkNPCongOpzioneField, align);
+
 		layout.addComponent(checkNPAttPartField, 3, 8);
 		layout.setComponentAlignment(checkNPAttPartField, align);
 
@@ -481,6 +509,7 @@ public class EmailConfigComponent extends BaseConfigPanel {
 				CompanyPrefs.sendMailRegisPaga.put(obj);
 				obj = getItemProperty(KEY_CHECK_MAIL_CONG_OPZ).getValue();
 				CompanyPrefs.sendMailCongOpzione.put(obj);
+
 				obj = getItemProperty(KEY_REF_MAIL_INFO_PREN).getValue();
 				CompanyPrefs.sendMailInfoPrenRef.put(obj);
 				obj = getItemProperty(KEY_REF_MAIL_SCAD_PREN).getValue();
@@ -523,6 +552,8 @@ public class EmailConfigComponent extends BaseConfigPanel {
 				CompanyPrefs.sendMailScadPrenNP.put(obj);
 				obj = getItemProperty(KEY_NP_MAIL_CONF_PREN).getValue();
 				CompanyPrefs.sendMailConfPrenNP.put(obj);
+				obj = getItemProperty(KEY_NP_MAIL_SCAD_PAGA).getValue();
+				CompanyPrefs.sendMailScadPagaNP.put(obj);
 				obj = getItemProperty(KEY_NP_MAIL_CONF_PAGA).getValue();
 				CompanyPrefs.sendMailConfPagaNP.put(obj);
 				obj = getItemProperty(KEY_NP_MAIL_REGIS_PAGA).getValue();

@@ -3,11 +3,8 @@ package it.algos.evento.config;
 import com.vaadin.data.Item;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.HorizontalLayout;
 
 @SuppressWarnings("serial")
 public abstract class BaseConfigPanel extends FormLayout implements ConfigComponent {
@@ -33,7 +30,7 @@ public abstract class BaseConfigPanel extends FormLayout implements ConfigCompon
 	protected Component createButtonPanel() {
 		HorizontalLayout layout = new HorizontalLayout();
 		layout.setMargin(true);
-		layout.setSpacing(true);
+		layout.setSpacing(false);
 		Button bSave = new Button("Registra");
 		bSave.addClickListener(new ClickListener() {
 			@Override

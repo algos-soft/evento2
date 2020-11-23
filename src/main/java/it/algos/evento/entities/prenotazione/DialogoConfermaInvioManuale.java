@@ -141,7 +141,7 @@ class DialogoConfermaInvioManuale extends ConfirmDialog {
     protected void populateUI() {
         String s;
         s = pren.getEmailRiferimento();
-        if (s != null && !s.equals("")) {
+        if (!StringUtils.isEmpty(s)) {
             sendRef.setValue(true);
             mailRef.setValue(s);
         }

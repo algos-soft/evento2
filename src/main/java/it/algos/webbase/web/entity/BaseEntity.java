@@ -283,6 +283,30 @@ public abstract class BaseEntity implements Serializable {
     }// end of method
 
 
+
+    /**
+     * Reload the state of this entity from the database
+     */
+    public void refresh(EntityManager manager){
+
+        boolean usaManagerLocale = false;
+
+        // se non specificato l'EntityManager, ne crea uno locale
+        if (manager == null) {
+            manager = EM.createEntityManager();
+            usaManagerLocale = true;
+        }
+
+        manager.refresh(this);
+
+        // eventualmente chiude l'EntityManager locale
+        if (usaManagerLocale) {
+            manager.close();
+        }// end of if cycle
+
+    }
+
+
 //	/**
 //	 * Refreshes the contents from the database
 //	 */

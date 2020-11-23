@@ -9,10 +9,7 @@ import com.vaadin.data.util.filter.And;
 import com.vaadin.data.util.filter.Compare;
 import com.vaadin.event.Action;
 import com.vaadin.server.Page;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.Table;
+import com.vaadin.ui.*;
 import it.algos.evento.EventoApp;
 import it.algos.evento.EventoBootStrap;
 import it.algos.evento.entities.comune.Comune;
@@ -34,6 +31,7 @@ import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.entity.BaseEntity;
 import it.algos.webbase.web.lib.*;
 
+import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -397,7 +395,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -446,7 +444,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -492,7 +490,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -556,7 +554,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -575,6 +573,12 @@ public abstract class PrenotazioneBaseTable extends ETable {
         // esegue
         if (cont) {
             DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma prenotazione", "Vuoi inviare la mail di conferma prenotazione?", true);
+
+            // default selezione checkboxes
+            ModelliLettere modello=ModelliLettere.confermaPrenotazione;
+            dialog.setCheckedReferente(modello.isSendReferente(pren));
+            dialog.setCheckedScuola(modello.isSendScuola(pren));
+
             dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
                 @Override
                 public void confirmed(ConfirmDialog d) {
@@ -625,7 +629,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -704,15 +708,16 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
     /**
-     * Invio email promemoria invio conferma prenotazione
+     * Invio email sollecito invio conferma prenotazione
      * <p>
      * Invocato dai menu
      */
-    public void inviaMemoConfermaPren() {
+    public void inviaSollecitoConfermaPren() {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
+
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -728,7 +733,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
         // esegue
         if (cont) {
-            String testo = "Invia una e-mail di sollecito e proroga la scadenza a " + CompanyPrefs.ggProlungamentoConfDopoSollecito.getInt() + " giorni da oggi.";
+            String testo = "Invia una e-mail di sollecito di conferma della prenotazione e proroga la scadenza a " + CompanyPrefs.ggProlungamentoConfDopoSollecito.getInt() + " giorni da oggi.";
             DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma prenotazione", testo, true);
 
             // default selezione checkboxes
@@ -777,15 +782,15 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
     /**
-     * Invio email promemoria scadenza pagamento
+     * Invio email sollecito scadenza pagamento
      * <p>
      * Invocato dai menu
      */
-    public void inviaPromemoriaScadenzaPagamento() {
+    public void inviaSollecitoScadenzaPagamento() {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -858,16 +863,69 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
     /**
-     * Invio email conferma pagamento
+     * Invio email di conferma ricevuto pagamento
      * <p>
      * Invocato dai menu
      */
     public void inviaConfermaPagamento() {
-        Notification.show("Invio email conferma pagamento - da implementare");
+
+        // una e una sola selezionata
+        Prenotazione pren = getSelectedPren();
+        if (pren == null) {
+            Notification.show("Seleziona prima una prenotazione.");
+            return;
+        }
+
+        // il pagamento deve essere già confermato
+        if (!pren.isPagamentoConfermato()) {
+            Notification.show("Il pagamento non è confermato.");
+            return;
+        }
+
+        // esecuzione
+        DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma pagamento", "Invio e-mail di conferma pagamento", true);
+
+        // default selezione checkboxes
+        ModelliLettere modello=ModelliLettere.confermaPagamento;
+        dialog.setCheckedReferente(modello.isSendReferente(pren));
+        dialog.setCheckedScuola(modello.isSendScuola(pren));
+
+        dialog.setConfirmListener(d -> {
+
+            String dests = dialog.getDestinatari();
+
+            // esegue l'operazione in un thread separato
+            // al termine dell'operazione viene visualizzata una notifica
+            new Thread(
+                    () -> {
+
+                        try {
+
+                            Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.confermaPagamento, EventoBootStrap.getUsername(), dests);
+
+                            refreshRowCache();
+
+                            Notification notification = new Notification("Conferma pagamento n. " + pren.getNumPrenotazione() + " inviata a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
+
+                        } catch (EmailFailedException e) {
+                            PrenotazioneModulo.notifyEmailFailed(e);
+                        }
+
+                    }
+
+            ).start();
+
+        });
+
+        dialog.show();
+
     }
 
+
     /**
-     * Invio email conferma registrazione pagamento
+     * Invio email di conferma avvenuta registrazione pagamento
      * <p>
      * Invocato dai menu
      */
@@ -893,7 +951,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
         boolean cont = true;
 
         // controllo una e una sola selezionata
-        Prenotazione pren = (Prenotazione) getSelectedEntity();
+        Prenotazione pren = getSelectedPren();
         if (pren == null) {
             cont = false;
             Notification.show("Seleziona prima una prenotazione.");
@@ -1053,12 +1111,17 @@ public abstract class PrenotazioneBaseTable extends ETable {
      * Return the Actions to display in contextual menu
      */
     protected Action[] getActions(Object target, Object sender) {
+
+        Action divider = new Action(null);
+        divider.setCaption("<hr>");
+
         Action[] actions = super.getActions(target, sender);
         ArrayList<Action> aActions = new ArrayList<>();
         for (Action a : actions) {
             aActions.add(a);
         }
 
+        aActions.add(divider);
 
         aActions.add(act_invia_info_prenotazione);
         aActions.add(act_invia_memo_scadenza_prenotazione);
@@ -1068,7 +1131,9 @@ public abstract class PrenotazioneBaseTable extends ETable {
         aActions.add(act_invia_registrazione_pagamento);
         aActions.add(act_invia_avviso_congelamento_opzione);
         aActions.add(act_invia_attestato_partecipazione);
-        //====
+
+        aActions.add(divider);
+
         aActions.add(actConfermaPrenotazione);
         aActions.add(actRegistraPagamento);
         aActions.add(actCongelaPrenotazione);
@@ -1114,7 +1179,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
                 }
 
                 if (action.equals(act_invia_memo_scadenza_prenotazione)) {
-                    inviaMemoConfermaPren();
+                    inviaSollecitoConfermaPren();
                 }
 
                 if (action.equals(act_invia_conferma_prenotazione)) {
@@ -1123,7 +1188,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
 
                 if (action.equals(act_invia_memo_scadenza_pagamento)) {
-                    inviaPromemoriaScadenzaPagamento();
+                    inviaSollecitoScadenzaPagamento();
                 }
 
 
@@ -1426,4 +1491,33 @@ public abstract class PrenotazioneBaseTable extends ETable {
     }
 
 
+    /**
+     * Recupera la prenotazione correntemente selezionata e refresha le entity relazionate
+     */
+    private Prenotazione getSelectedPren() {
+        Prenotazione pren=null;
+        BaseEntity entity = super.getSelectedEntity();
+        if(entity!=null && entity instanceof Prenotazione){
+
+            pren=(Prenotazione)entity;
+            EntityManager em = getEntityManager();
+
+            Rappresentazione rapp = pren.getRappresentazione();
+            if(rapp!=null){
+                rapp.refresh(em);
+            }
+
+            Scuola scuola = pren.getScuola();
+            if(scuola!=null){
+                scuola.refresh(em);
+            }
+
+            Insegnante insegnante = pren.getInsegnante();
+            if(insegnante!=null){
+                insegnante.refresh(em);
+            }
+
+        }
+        return pren;
+    }
 }

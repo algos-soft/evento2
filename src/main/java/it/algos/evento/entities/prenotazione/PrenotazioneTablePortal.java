@@ -88,7 +88,7 @@ public class PrenotazioneTablePortal extends TablePortal {
         item.addItem(Prenotazione.CMD_MEMO_INVIO_SCHEDA_PREN, Prenotazione.ICON_MEMO_INVIO_SCHEDA_PREN, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
                 if (getTable().getSelectedEntity() != null) {
-                    getPrenotazioneTable().inviaMemoConfermaPren();
+                    getPrenotazioneTable().inviaSollecitoConfermaPren();
                 } else {
                     msgNoSelection();
                 }
@@ -109,7 +109,7 @@ public class PrenotazioneTablePortal extends TablePortal {
         item.addItem(Prenotazione.CMD_MEMO_SCAD_PAGA, Prenotazione.ICON_MEMO_SCAD_PAGA, new MenuBar.Command() {
             public void menuSelected(MenuItem selectedItem) {
                 if (getTable().getSelectedEntity() != null) {
-                    getPrenotazioneTable().inviaPromemoriaScadenzaPagamento();
+                    getPrenotazioneTable().inviaSollecitoScadenzaPagamento();
                 } else {
                     msgNoSelection();
                 }
