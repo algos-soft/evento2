@@ -25,7 +25,7 @@ public enum ModelliLettere {
 
     congelamentoOpzione("congelamento_opzione", "Avviso di congelamento dell’opzione telefonica", CompanyPrefs.sendMailCongOpzione, CompanyPrefs.sendMailCongOpzioneRef, CompanyPrefs.sendMailCongOpzioneScuola, CompanyPrefs.sendMailCongOpzioneNP),
 
-    attestatoPartecipazione("attestato_partecipazione", "Attestato di partecipazione", null, null, null, null),
+    attestatoPartecipazione("attestato_partecipazione", "Attestato di partecipazione", null, CompanyPrefs.sendMailAttPartRef, CompanyPrefs.sendMailAttPartScuola, CompanyPrefs.sendMailAttPartNP),
 
     demoSostituzioni("demo_sostituzioni", "Demo sostituzioni supportate", null, null, null, null);
 

@@ -626,83 +626,76 @@ public abstract class PrenotazioneBaseTable extends ETable {
      * Invocato dai menu
      */
     public void inviaAttestatoPartecipazione() {
-        boolean cont = true;
 
         // controllo una e una sola selezionata
         Prenotazione pren = getSelectedPren();
         if (pren == null) {
-            cont = false;
             Notification.show("Seleziona prima una prenotazione.");
+            return;
         }
 
         // controllo che la prenotazione sia confermata
-        if (cont) {
-            if (!pren.isConfermata()) {
-                cont = false;
-                Notification notification = new Notification("Questa prenotazione non è confermata", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(-1);
-                notification.show(Page.getCurrent());
-            }
+        if (!pren.isConfermata()) {
+            Notification notification = new Notification("Questa prenotazione non è confermata", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(-1);
+            notification.show(Page.getCurrent());
+            return;
         }
 
         // controllo che il pagamento sia stato effettivamente ricevuto
-        if (cont) {
-            if (!pren.isPagamentoRicevuto()) {
-                cont = false;
-                Notification notification = new Notification("Il pagamento non è ancora stato ricevuto", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(-1);
-                notification.show(Page.getCurrent());
-            }
+        if (!pren.isPagamentoRicevuto()) {
+            Notification notification = new Notification("Il pagamento non è ancora stato ricevuto", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(-1);
+            notification.show(Page.getCurrent());
+            return;
         }
 
         // controllo che la prenotazione non sia congelata
-        if (cont) {
-            if (pren.isCongelata()) {
-                cont = false;
-                Notification notification = new Notification("Questa prenotazione è già congelata", "\nSe vuoi puoi reinviare la email dagli Eventi Prenotazione.", Notification.Type.HUMANIZED_MESSAGE);
-                notification.setDelayMsec(-1);
-                notification.show(Page.getCurrent());
-            }
+        if (pren.isCongelata()) {
+            Notification notification = new Notification("Questa prenotazione è già congelata", "\nSe vuoi puoi reinviare la email dagli Eventi Prenotazione.", Notification.Type.HUMANIZED_MESSAGE);
+            notification.setDelayMsec(-1);
+            notification.show(Page.getCurrent());
+            return;
         }
 
         // esegue
-        if (cont) {
-            DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio attestato di partecipazione", "Vuoi inviare l'attestato di partecipazione?", true);
-            dialog.setConfirmListener(new ConfirmDialog.ConfirmListener() {
-                @Override
-                public void confirmed(ConfirmDialog d) {
+        DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio attestato di partecipazione", "Vuoi inviare l'attestato di partecipazione?", true);
 
-                    String dests = dialog.getDestinatari();
+        // default selezione checkboxes
+        ModelliLettere modello=ModelliLettere.attestatoPartecipazione;
+        dialog.setCheckedReferente(modello.isSendReferente(pren));
+        dialog.setCheckedScuola(modello.isSendScuola(pren));
 
-                    // esegue l'operazione in un thread separato
-                    // al termine dell'operazione viene visualizzata una notifica
-                    new Thread(
-                            () -> {
+        dialog.setConfirmListener(d -> {
 
-                                try {
+            String dests = dialog.getDestinatari();
 
-                                    Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.attestatoPartecipazione, EventoBootStrap.getUsername(), dests);
+            // esegue l'operazione in un thread separato
+            // al termine dell'operazione viene visualizzata una notifica
+            new Thread(
+                    () -> {
 
-                                    refreshRowCache();
+                        try {
 
-                                    Notification notification = new Notification("Attestato partecipazione prenotazione n. " + pren.getNumPrenotazione() + " inviato a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
-                                    notification.setDelayMsec(-1);
-                                    notification.show(Page.getCurrent());
+                            Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.attestatoPartecipazione, EventoBootStrap.getUsername(), dests);
 
-                                } catch (EmailFailedException e) {
-                                    PrenotazioneModulo.notifyEmailFailed(e);
-                                }
+                            refreshRowCache();
 
-                            }
+                            Notification notification = new Notification("Attestato partecipazione prenotazione n. " + pren.getNumPrenotazione() + " inviato a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
 
-                    ).start();
+                        } catch (EmailFailedException e) {
+                            PrenotazioneModulo.notifyEmailFailed(e);
+                        }
 
-                }
-            });
+                    }
 
-            dialog.show();
+            ).start();
 
-        }
+        });
+
+        dialog.show();
 
     }
 
@@ -733,7 +726,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
         // esegue
         if (cont) {
-            String testo = "Invia una e-mail di sollecito di conferma della prenotazione e proroga la scadenza a " + CompanyPrefs.ggProlungamentoConfDopoSollecito.getInt() + " giorni da oggi.";
+            String testo = "Invia una e-mail di sollecito di conferma della prenotazione e <strong>proroga la scadenza a " + CompanyPrefs.ggProlungamentoConfDopoSollecito.getInt() + " giorni da oggi</strong>.";
             DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma prenotazione", testo, true);
 
             // default selezione checkboxes
@@ -814,7 +807,7 @@ public abstract class PrenotazioneBaseTable extends ETable {
 
         // esegue
         if (cont) {
-            String testo = "Invia una e-mail di sollecito e proroga la scadenza pagamento a " + CompanyPrefs.ggProlungamentoPagamDopoSollecito.getInt() + " giorni da oggi.";
+            String testo = "Invia una e-mail di sollecito e <strong>proroga la scadenza pagamento a " + CompanyPrefs.ggProlungamentoPagamDopoSollecito.getInt() + " giorni da oggi</strong>.";
             DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Sollecito conferma pagamento", testo, true);
 
             // default selezione checkboxes
@@ -930,8 +923,62 @@ public abstract class PrenotazioneBaseTable extends ETable {
      * Invocato dai menu
      */
     public void inviaConfermaRegistrazionePagamento() {
-        Notification.show("Invio email conferma registrazione pagamento - da implementare");
+
+        // una e una sola selezionata
+        Prenotazione pren = getSelectedPren();
+        if (pren == null) {
+            Notification.show("Seleziona prima una prenotazione.");
+            return;
+        }
+
+        // il pagamento deve essere già registrato
+        if (!pren.isPagamentoRicevuto()) {
+            Notification.show("Il pagamento non è stato ancora registrato.");
+            return;
+        }
+
+        // esecuzione
+        DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio conferma registrazione pagamento", "Invio e-mail di conferma di avvenuta registrazione del pagamento", true);
+
+        // default selezione checkboxes
+        ModelliLettere modello=ModelliLettere.registrazionePagamento;
+        dialog.setCheckedReferente(modello.isSendReferente(pren));
+        dialog.setCheckedScuola(modello.isSendScuola(pren));
+
+        dialog.setConfirmListener(d -> {
+
+            String dests = dialog.getDestinatari();
+
+            // esegue l'operazione in un thread separato
+            // al termine dell'operazione viene visualizzata una notifica
+            new Thread(
+                    () -> {
+
+                        try {
+
+                            Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.registrazionePagamento, EventoBootStrap.getUsername(), dests);
+
+                            refreshRowCache();
+
+                            Notification notification = new Notification("Conferma registrazione pagamento n. " + pren.getNumPrenotazione() + " inviata a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
+
+                        } catch (EmailFailedException e) {
+                            PrenotazioneModulo.notifyEmailFailed(e);
+                        }
+
+                    }
+
+            ).start();
+
+        });
+
+        dialog.show();
+
+
     }
+
 
     /**
      * Invio email avviso congelamento prenotazione
@@ -939,7 +986,59 @@ public abstract class PrenotazioneBaseTable extends ETable {
      * Invocato dai menu
      */
     public void inviaAvvisoCongelamentoPrenotazione() {
-        Notification.show("Invio email avviso congelamento prenotazione - da implementare");
+
+        // una e una sola selezionata
+        Prenotazione pren = getSelectedPren();
+        if (pren == null) {
+            Notification.show("Seleziona prima una prenotazione.");
+            return;
+        }
+
+        // la prenotazione deve essere congelata
+        if (!pren.isCongelata()) {
+            Notification.show("La prenotazione non è congelata.");
+            return;
+        }
+
+        // esecuzione
+        DialogoConfermaInvioManuale dialog = new DialogoConfermaInvioManuale(pren, "Invio avviso congelamento prenotazione", "Invio e-mail di notifica del congelamento della prenotazione", true);
+
+        // default selezione checkboxes
+        ModelliLettere modello=ModelliLettere.congelamentoOpzione;
+        dialog.setCheckedReferente(modello.isSendReferente(pren));
+        dialog.setCheckedScuola(modello.isSendScuola(pren));
+
+        dialog.setConfirmListener(d -> {
+
+            String dests = dialog.getDestinatari();
+
+            // esegue l'operazione in un thread separato
+            // al termine dell'operazione viene visualizzata una notifica
+            new Thread(
+                    () -> {
+
+                        try {
+
+                            Spedizione sped = PrenotazioneModulo.sendEmailEvento(pren, TipoEventoPren.congelamentoOpzione, EventoBootStrap.getUsername(), dests);
+
+                            refreshRowCache();
+
+                            Notification notification = new Notification("Notifica congelamento prenotazione n. " + pren.getNumPrenotazione() + " inviata a " + sped.getDestinatario(), "", Notification.Type.HUMANIZED_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
+
+                        } catch (EmailFailedException e) {
+                            PrenotazioneModulo.notifyEmailFailed(e);
+                        }
+
+                    }
+
+            ).start();
+
+        });
+
+        dialog.show();
+
     }
 
     /**
