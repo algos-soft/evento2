@@ -12,10 +12,7 @@ import it.algos.webbase.domain.company.BaseCompany;
 import it.algos.webbase.domain.company.BaseCompany;
 import it.algos.webbase.web.entity.BaseEntity;
 import it.algos.webbase.web.query.AQuery;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailAttachment;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.ImageHtmlEmail;
+import org.apache.commons.mail.*;
 
 import javax.mail.util.ByteArrayDataSource;
 import java.util.ArrayList;
@@ -212,6 +209,8 @@ public class LetteraService {
 
 
         email = new ImageHtmlEmail();
+        email.setCharset(EmailConstants.UTF_8);
+
 
 //        //adds attachments
 //        if (allegati != null && !allegati.equals("")) {
