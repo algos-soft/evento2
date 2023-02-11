@@ -13,7 +13,13 @@ import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.lib.LibDate;
 import it.algos.webbase.web.module.ModulePop;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("serial")
 public class EventoPrenTable extends ETable {
@@ -114,21 +120,80 @@ public class EventoPrenTable extends ETable {
 		@Override
 		protected void onConfirm() {
 			super.onConfirm();
-			
-			Prenotazione pren = evento.getPrenotazione();
-			TipoEventoPren tipo = TipoEventoPren.getItem(evento.getTipo());
-			String user = EventoBootStrap.getUsername();
-			try {
-				PrenotazioneModulo.sendEmailEvento(pren, tipo, user);
-			} catch (EmailFailedException e) {
-				Notification.show("Invio email fallito", "\n"+e.getMessage(), Notification.Type.WARNING_MESSAGE);
-			}
-			refreshRowCache();
+
+//			Notification.show("Invio in corso...");
+
+			NotifyingRunnable runnable = new NotifyingRunnable() {
+
+				@Override
+				public void doRun() {
+					Prenotazione pren = evento.getPrenotazione();
+					TipoEventoPren tipo = TipoEventoPren.getItem(evento.getTipo());
+					String user = EventoBootStrap.getUsername();
+					String emails = extractEmails(evento.getDettagli());
+					try {
+						PrenotazioneModulo.sendEmailEvento(pren, tipo, user, emails);
+						Notification.show("Invio eseguito");
+					} catch (EmailFailedException e) {
+						Notification.show("Invio email fallito", "\n"+e.getMessage(), Notification.Type.WARNING_MESSAGE);
+					}
+				}
+
+			};
+
+			runnable.addListener(new RunnableCompleteListener() {
+				@Override
+				public void onRunCompleted(NotifyingRunnable runnable) {
+					refreshRowCache();
+				}
+			});
+
+			new Thread(runnable).start();
 
 		}
 		
 	}
-	
+
+	public interface RunnableCompleteListener {
+		void onRunCompleted(NotifyingRunnable runnable);
+	}
+
+	abstract class NotifyingRunnable implements Runnable{
+
+		private final Set<RunnableCompleteListener> listeners
+				= new CopyOnWriteArraySet<>();
+		public final void addListener(final RunnableCompleteListener listener) {
+			listeners.add(listener);
+		}
+		public final void removeListener(final RunnableCompleteListener listener) {
+			listeners.remove(listener);
+		}
+		private final void notifyListeners() {
+			for (RunnableCompleteListener listener : listeners) {
+				listener.onRunCompleted(this);
+			}
+		}
+
+		@Override
+		public final void run() {
+			try {
+				doRun();
+			} finally {
+				notifyListeners();
+			}
+		}
+		public abstract void doRun();
+
+//		@Override
+//		public void run() {
+//			super.run();
+//		}
+
+
+
+	}
+
+
 	/**
 	 * Genera la colonna esito email.
 	 */
@@ -150,6 +215,33 @@ public class EventoPrenTable extends ETable {
 			return comp;
 		}
 	}
+
+	private String extractEmails(String s){
+		List<String> emails = parseEmails(s);
+		StringBuffer sb = new StringBuffer();
+		int i=0;
+		for(String email : emails){
+			if(i!=0){
+				sb.append(", ");
+			}
+			sb.append(email);
+			i++;
+		}
+		return sb.toString();
+	}
+
+	private List<String> parseEmails(String s){
+		List<String> emails = new ArrayList<>();
+		Matcher m = Pattern.compile("[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+").matcher(s);
+		while (m.find()) {
+			emails.add(m.group());
+		}
+		return emails;
+	}
+
+
+
+
 
 
 

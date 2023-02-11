@@ -224,13 +224,13 @@ public class PrenotazioneModulo extends CompanyModule {
     }// end of method
 
 
-    /**
-     * Invio email istruzioni (no UI)
-     */
-    public static void doInvioIstruzioni(Prenotazione pren, String user) throws EmailFailedException {
-        TipoEventoPren tipoEvento = TipoEventoPren.invioIstruzioni;
-        sendEmailEvento(pren, tipoEvento, user);
-    }
+//    /**
+//     * Invio email istruzioni (no UI)
+//     */
+//    public static void doInvioIstruzioni(Prenotazione pren, String user) throws EmailFailedException {
+//        TipoEventoPren tipoEvento = TipoEventoPren.invioIstruzioni;
+//        sendEmailEvento(pren, tipoEvento, user);
+//    }
 
 //    /**
 //     * Invio email istruzioni (no UI) e fire status changed modulo
@@ -595,7 +595,8 @@ public class PrenotazioneModulo extends CompanyModule {
      * @param pren       la prenotazione
      * @param tipoEvento il tipo di evento
      * @param user       l'utente che genera l'evento
-     * @param addr       elenco indirizzi destinatari - se nullo li recupera dalla prenotazione in base al tipo di lettera
+     * @param addr       elenco indirizzi destinatari separato da virgola
+     *                   - se nullo li recupera dalla prenotazione in base al tipo di lettera
      * @return l'eisto della spedizione
      */
     public static Spedizione sendEmailEvento(Prenotazione pren, TipoEventoPren tipoEvento, String user, String addr)

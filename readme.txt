@@ -15,6 +15,37 @@ Per un redeploy completo su macchina di sviluppo:
 - Build Project
 - fullDeploy.sh
 
+Credenziali Tomcat di Sviluppo (admin)
+=============================
+user: algos
+pass: fulvia
+
+Accesso a eVento come Admin
+=============================
+url: http://localhost:8080/evento/admin
+
+Accessi in produzione:
+=============================
+Extrateatro:
+accesso utente:
+- url: eventoweb.algos.biz
+- user: extrateatro
+- pass: Extrateatr0
+accesso Admin:
+- url: eventoweb.algos.biz/admin
+- user: admin
+- pass: evento
+
+Asteria:
+accesso utente:
+- url: localhost:8080/evento
+- accesso senza login e password (utenti non autenticati)
+accesso Admin:
+- url: localhost:8080/evento/admin
+- user: admin
+- pass: evento
+
+
 
 Per il deploy in produzione:
 =============================
