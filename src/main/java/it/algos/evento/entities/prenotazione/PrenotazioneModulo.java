@@ -27,6 +27,7 @@ import it.algos.evento.pref.CompanyPrefs;
 import it.algos.webbase.domain.company.BaseCompany;
 import it.algos.webbase.multiazienda.CompanyModule;
 import it.algos.webbase.web.converter.StringToBigDecimalConverter;
+import it.algos.webbase.web.dialog.AlertDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.field.ArrayComboField;
 import it.algos.webbase.web.field.EmailField;
@@ -36,6 +37,7 @@ import it.algos.webbase.web.lib.LibSession;
 import it.algos.webbase.web.search.SearchManager;
 import it.algos.webbase.web.table.ATable;
 import it.algos.webbase.web.table.TablePortal;
+import it.algos.webbase.web.thread.NotifyingThread;
 import org.joda.time.DateTime;
 
 import javax.persistence.EntityManager;
@@ -1053,54 +1055,86 @@ public class PrenotazioneModulo extends CompanyModule {
 
         @Override
         protected void onConfirm() {
-            boolean cont = true;
-            ModelliLettere modello = null;
-            String email = null;
 
-            Object value = letteraField.getValue();
-            if (value != null) {
-                modello = (ModelliLettere) value;
-            } else {
-                cont = false;
-            }
 
-            if (cont) {
-                email = emailField.getValue();
-                if (email.equals("")) {
-                    cont = false;
-                }
-            }
 
-            if (cont) {
 
-                // prepara una mappa di informazioni per la prenotazione
-                LetteraMap escapeMap = createEscapeMap(pren);
 
-                // prepara una mappa di informazioni email
-                HashMap<String, Object> mailMap = null;
-                try {
-                    mailMap = createMailMap(pren, modello, modello.getOggetto(), email);
 
-                    // spedisce la mail
-                    Lettera lettera = Lettera.getLettera(modello, pren.getCompany());
-                    Spedizione sped = LetteraService.spedisci(lettera, escapeMap, mailMap);
-                    if (sped.isSpedita()) {
-                        Notification.show("Email spedita");
-                        super.onConfirm();
+            super.onConfirm();
+
+            AlertDialog progressDialog = new AlertDialog("Invio mail in corso");
+            progressDialog.show();
+
+            NotifyingThread thread = new NotifyingThread() {
+
+                @Override
+                public void doRun() {
+                    boolean cont = true;
+                    ModelliLettere modello = null;
+                    String email = null;
+
+                    Object value = letteraField.getValue();
+                    if (value != null) {
+                        modello = (ModelliLettere) value;
                     } else {
-                        Notification notification = new Notification("Invio email fallito", "\n" + sped.getErrore(), Notification.Type.ERROR_MESSAGE);
-                        notification.setDelayMsec(-1);
-                        notification.show(Page.getCurrent());
+                        cont = false;
                     }
 
+                    if (cont) {
+                        email = emailField.getValue();
+                        if (email.equals("")) {
+                            cont = false;
+                        }
+                    }
 
-                } catch (EmailInfoMissingException e) {
-                    Notification notification = new Notification("Informazioni mancanti", "\n" + e.getMessage(), Notification.Type.ERROR_MESSAGE);
-                    notification.setDelayMsec(-1);
-                    notification.show(Page.getCurrent());
+                    if (cont) {
+
+                        // prepara una mappa di informazioni per la prenotazione
+                        LetteraMap escapeMap = createEscapeMap(pren);
+
+                        // prepara una mappa di informazioni email
+                        HashMap<String, Object> mailMap = null;
+                        try {
+                            mailMap = createMailMap(pren, modello, modello.getOggetto(), email);
+
+                            // spedisce la mail
+                            Lettera lettera = Lettera.getLettera(modello, pren.getCompany());
+                            Spedizione sped = LetteraService.spedisci(lettera, escapeMap, mailMap);
+                            if (sped.isSpedita()) {
+                                Notification.show("Email spedita");
+//                                super.onConfirm();
+                            } else {
+                                Notification notification = new Notification("Invio email fallito", "\n" + sped.getErrore(), Notification.Type.ERROR_MESSAGE);
+                                notification.setDelayMsec(-1);
+                                notification.show(Page.getCurrent());
+                            }
+
+
+                        } catch (EmailInfoMissingException e) {
+                            Notification notification = new Notification("Informazioni mancanti", "\n" + e.getMessage(), Notification.Type.ERROR_MESSAGE);
+                            notification.setDelayMsec(-1);
+                            notification.show(Page.getCurrent());
+                        }
+
+                    }
+
                 }
 
-            }
+            };
+
+            thread.addListener(thread1 -> {
+                progressDialog.close();
+            });
+
+            thread.start();
+
+
+
+
+
+
+
 
         }
 

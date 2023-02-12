@@ -31,14 +31,12 @@ public class PrenotazioneTablePortal extends TablePortal {
         // bottone Altro...
         MenuBar.MenuItem item = toolbar.addButton("Altro...", FontAwesome.BARS, null);
 
-        item.addItem("Mostra prenotazioni scadute", FontAwesome.CLOCK_O, new MenuBar.Command() {
-            public void menuSelected(MenuItem selectedItem) {
-                Filter filter = PrenotazioneModulo.getFiltroPrenotazioniScadute();
-                Container.Filterable cont = getTable().getFilterableContainer();
-                cont.removeAllContainerFilters();
-                getTable().refresh(); // refresh container before applying new filters
-                cont.addContainerFilter(filter);
-            }
+        item.addItem("Mostra prenotazioni scadute", FontAwesome.CLOCK_O, (MenuBar.Command) selectedItem -> {
+            Filter filter = PrenotazioneModulo.getFiltroPrenotazioniScadute();
+            Container.Filterable cont = getTable().getFilterableContainer();
+            cont.removeAllContainerFilters();
+            getTable().refresh(); // refresh container before applying new filters
+            cont.addContainerFilter(filter);
         });// end of anonymous class
 
         item.addItem("Mostra conferme pagamento scadute", FontAwesome.CLOCK_O, new MenuBar.Command() {

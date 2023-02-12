@@ -13,12 +13,11 @@ import it.algos.webbase.web.dialog.AlertDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.lib.LibDate;
 import it.algos.webbase.web.module.ModulePop;
+import it.algos.webbase.web.thread.NotifyingThread;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -129,7 +128,7 @@ public class EventoPrenTable extends ETable {
 						PrenotazioneModulo.sendEmailEvento(pren, tipo, user, emails);
 						Notification.show("Invio mail eseguito");
 					} catch (EmailFailedException e) {
-						Notification.show("Invio email fallito", "\n"+e.getMessage(), Notification.Type.WARNING_MESSAGE);
+						Notification.show("Invio email fallito", "\n"+e.getMessage(), Notification.Type.ERROR_MESSAGE);
 					}
 				}
 
@@ -144,38 +143,6 @@ public class EventoPrenTable extends ETable {
 
 		}
 		
-	}
-
-	abstract class NotifyingThread extends Thread {
-
-		private final Set<ThreadCompleteListener> listeners = new CopyOnWriteArraySet<>();
-		public final void addListener(final ThreadCompleteListener listener) {
-			listeners.add(listener);
-		}
-		public final void removeListener(final ThreadCompleteListener listener) {
-			listeners.remove(listener);
-		}
-		private final void notifyListeners() {
-			for (ThreadCompleteListener listener : listeners) {
-				listener.onThreadCompleted(this);
-			}
-		}
-
-		@Override
-		public final void run() {
-			try {
-				doRun();
-			} finally {
-				notifyListeners();
-			}
-		}
-		public abstract void doRun();
-
-	}
-
-
-	public interface ThreadCompleteListener {
-		void onThreadCompleted(NotifyingThread thread);
 	}
 
 
