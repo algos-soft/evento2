@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
-@DefaultSort({"dataSpedizione"})
+@DefaultSort({"dataSpedizione, false"})
 public class Spedizione extends CompanyEntity {
 
 	private static final long serialVersionUID = 5331901372570434340L;

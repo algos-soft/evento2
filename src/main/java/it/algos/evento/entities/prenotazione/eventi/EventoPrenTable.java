@@ -39,6 +39,7 @@ public class EventoPrenTable extends ETable {
 		setColumnHeader(EventoPren_.user, "Utente");
 
 		setColumnAlignment(EventoPren_.tipo, Align.LEFT);
+
 	}
 
 

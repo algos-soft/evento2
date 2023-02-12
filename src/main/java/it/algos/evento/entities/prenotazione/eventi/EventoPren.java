@@ -11,7 +11,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
-@DefaultSort({"timestamp"})
+@DefaultSort({"timestamp, false"})
 public class EventoPren extends CompanyEntity {
 
 	private static final long serialVersionUID = -4029444656977204712L;
