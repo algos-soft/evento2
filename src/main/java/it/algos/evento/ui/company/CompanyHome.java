@@ -4,6 +4,7 @@ import com.vaadin.server.*;
 import com.vaadin.ui.*;
 import it.algos.evento.*;
 import it.algos.evento.config.ConfigScreen;
+import it.algos.evento.daemons.EventiPrenRotator;
 import it.algos.evento.debug.DialogoCheckPrenScadute;
 import it.algos.evento.demo.DemoDataGenerator;
 import it.algos.evento.entities.comune.ComuneModulo;
@@ -39,6 +40,7 @@ import it.algos.webbase.web.navigator.AlgosNavigator;
 import it.algos.webbase.web.navigator.MenuCommand;
 
 import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -151,6 +153,14 @@ public class CompanyHome extends VerticalLayout {
         item = menubar.addItem("Aiuto", null, null);
         item.addItem("Informazioni", null, new MenuCommand(menubar,  InfoModulo.class));
         item.addItem("Manuale Utente", null, new MenuCommand(menubar, HelpModulo.class));
+
+//        MenuBar.Command command = new MenuBar.Command(){
+//            @Override
+//            public void menuSelected(MenuBar.MenuItem menuItem) {
+//                new EventiPrenRotator(LocalDate.now().minusYears(4)).run();
+//            }
+//        };
+//        item.addItem("Test", null, command);
 
         // Modo Programmatore
         if (LibSession.isDeveloper()) {

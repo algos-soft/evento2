@@ -4,6 +4,7 @@ import com.vaadin.data.Container;
 import com.vaadin.data.util.filter.And;
 import com.vaadin.data.util.filter.Compare;
 import it.algos.evento.daemons.DaemonPrenScadute;
+import it.algos.evento.daemons.DaemonRotateRegistroEventiPrenotazione;
 import it.algos.evento.entities.company.Company;
 import it.algos.evento.entities.lettera.Lettera;
 import it.algos.evento.entities.lettera.LetteraKeys;
@@ -76,6 +77,9 @@ public class EventoBootStrap extends ABootStrap {
             DaemonPrenScadute.getInstance().start();
         }// fine del blocco if
 
+        // avvia il daemon rotazione eventi prenotazioni che esegue una volta al giorno
+        DaemonRotateRegistroEventiPrenotazione.getInstance().start();
+
         //esegue qualcosa per ogni Company
         List<BaseCompany> comps = BaseCompany.query.getList();
         for (BaseCompany company : comps) {
@@ -124,6 +128,7 @@ public class EventoBootStrap extends ABootStrap {
 
         // arresta gli schedulers
         DaemonPrenScadute.getInstance().stop();
+        DaemonRotateRegistroEventiPrenotazione.getInstance().stop();
 
         super.contextDestroyed(sce);
 
