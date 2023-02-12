@@ -2,12 +2,11 @@ package it.algos.webbase.web.field;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.StreamResource;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Upload.*;
-import it.algos.webbase.web.dialog.AlertDialog;
+import it.algos.webbase.web.dialog.CloseableAlertDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.lib.LibResource;
 
@@ -115,7 +114,7 @@ public class ImageField extends ACustomField<byte[]> implements FieldInterface<b
 	}
 
 	
-	private class UploadDialog extends AlertDialog{
+	private class UploadDialog extends CloseableAlertDialog {
 
 
 		public UploadDialog() {

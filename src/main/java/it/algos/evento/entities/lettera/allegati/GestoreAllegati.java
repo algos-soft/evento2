@@ -4,13 +4,13 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import it.algos.evento.entities.lettera.allegati.AllegatoModulo.AllegatoListener;
-import it.algos.webbase.web.dialog.AlertDialog;
+import it.algos.webbase.web.dialog.CloseableAlertDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.entity.BaseEntity;
 import it.algos.webbase.web.field.TextField;
 
 @SuppressWarnings("serial")
-public class GestoreAllegati extends AlertDialog {
+public class GestoreAllegati extends CloseableAlertDialog {
 	
 	AllegatoModulo modulo;
 	private GTable table;

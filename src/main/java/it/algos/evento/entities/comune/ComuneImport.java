@@ -1,7 +1,7 @@
 package it.algos.evento.entities.comune;
 
 import it.algos.webbase.domain.company.BaseCompany;
-import it.algos.webbase.web.dialog.AlertDialog;
+import it.algos.webbase.web.dialog.CloseableAlertDialog;
 import it.algos.webbase.web.dialog.BaseDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.entity.EM;
@@ -186,7 +186,7 @@ public class ComuneImport {
 		BaseDialog dialog;
 		if (report.getFailed() == 0) {
 			String message = "<p>Record importati: " + report.getSuccess();
-			dialog = new AlertDialog("Importazione terminata",message);
+			dialog = new CloseableAlertDialog("Importazione terminata",message);
 
 		} else {
 

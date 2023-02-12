@@ -9,6 +9,7 @@ import it.algos.evento.entities.prenotazione.EmailFailedException;
 import it.algos.evento.entities.prenotazione.Prenotazione;
 import it.algos.evento.entities.prenotazione.PrenotazioneModulo;
 import it.algos.webbase.multiazienda.ETable;
+import it.algos.webbase.web.dialog.AlertDialog;
 import it.algos.webbase.web.dialog.ConfirmDialog;
 import it.algos.webbase.web.lib.LibDate;
 import it.algos.webbase.web.module.ModulePop;
@@ -39,13 +40,6 @@ public class EventoPrenTable extends ETable {
 
 		setColumnAlignment(EventoPren_.tipo, Align.LEFT);
 	}
-
-
-
-//	public EventoPrenTable(Class<?> entityClass) {
-//		super(entityClass);
-//	}
-
 
 
 	@Override
@@ -83,8 +77,6 @@ public class EventoPrenTable extends ETable {
 		@SuppressWarnings("unchecked")
 		public Component generateCell(Table source, Object itemId, Object columnId) {
 			Component comp = null;
-//			JPAContainerItem<EventoPren> item = (JPAContainerItem<EventoPren>) source.getItem(itemId);
-//			final EventoPren evento = item.getEntity();
 
 			final EventoPren evento = (EventoPren)getEntity(itemId);
 
@@ -121,9 +113,10 @@ public class EventoPrenTable extends ETable {
 		protected void onConfirm() {
 			super.onConfirm();
 
-//			Notification.show("Invio in corso...");
+			AlertDialog progressDialog = new AlertDialog("Invio mail in corso");
+			progressDialog.show();
 
-			NotifyingRunnable runnable = new NotifyingRunnable() {
+			NotifyingThread thread = new NotifyingThread() {
 
 				@Override
 				public void doRun() {
@@ -133,7 +126,7 @@ public class EventoPrenTable extends ETable {
 					String emails = extractEmails(evento.getDettagli());
 					try {
 						PrenotazioneModulo.sendEmailEvento(pren, tipo, user, emails);
-						Notification.show("Invio eseguito");
+						Notification.show("Invio mail eseguito");
 					} catch (EmailFailedException e) {
 						Notification.show("Invio email fallito", "\n"+e.getMessage(), Notification.Type.WARNING_MESSAGE);
 					}
@@ -141,36 +134,29 @@ public class EventoPrenTable extends ETable {
 
 			};
 
-			runnable.addListener(new RunnableCompleteListener() {
-				@Override
-				public void onRunCompleted(NotifyingRunnable runnable) {
-					refreshRowCache();
-				}
+			thread.addListener(thread1 -> {
+				progressDialog.close();
+				refresh();
 			});
 
-			new Thread(runnable).start();
+			thread.start();
 
 		}
 		
 	}
 
-	public interface RunnableCompleteListener {
-		void onRunCompleted(NotifyingRunnable runnable);
-	}
+	abstract class NotifyingThread extends Thread {
 
-	abstract class NotifyingRunnable implements Runnable{
-
-		private final Set<RunnableCompleteListener> listeners
-				= new CopyOnWriteArraySet<>();
-		public final void addListener(final RunnableCompleteListener listener) {
+		private final Set<ThreadCompleteListener> listeners = new CopyOnWriteArraySet<>();
+		public final void addListener(final ThreadCompleteListener listener) {
 			listeners.add(listener);
 		}
-		public final void removeListener(final RunnableCompleteListener listener) {
+		public final void removeListener(final ThreadCompleteListener listener) {
 			listeners.remove(listener);
 		}
 		private final void notifyListeners() {
-			for (RunnableCompleteListener listener : listeners) {
-				listener.onRunCompleted(this);
+			for (ThreadCompleteListener listener : listeners) {
+				listener.onThreadCompleted(this);
 			}
 		}
 
@@ -184,13 +170,11 @@ public class EventoPrenTable extends ETable {
 		}
 		public abstract void doRun();
 
-//		@Override
-//		public void run() {
-//			super.run();
-//		}
+	}
 
 
-
+	public interface ThreadCompleteListener {
+		void onThreadCompleted(NotifyingThread thread);
 	}
 
 

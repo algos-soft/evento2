@@ -17,7 +17,6 @@ import it.algos.evento.entities.prenotazione.Prenotazione_;
 import it.algos.evento.multiazienda.EQuery;
 import it.algos.webbase.multiazienda.CompanyModule;
 import it.algos.webbase.multiazienda.CompanyQuery;
-import it.algos.webbase.web.dialog.AlertDialog;
 import it.algos.webbase.web.entity.BaseEntity;
 import it.algos.webbase.web.entity.BaseEntity_;
 import it.algos.webbase.web.entity.EM;

@@ -56,13 +56,16 @@ public abstract class BaseDialog extends Window {
 		mainLayout = new VerticalLayout();
 		syncResizable();
 
-		mainLayout.addComponent(detail);
+		if(detail!=null){
+			mainLayout.addComponent(detail);
+			detail.setHeight("100%");
+			mainLayout.setExpandRatio(detail, 1f);
+		}
 
-		detail.setHeight("100%");
-		mainLayout.setExpandRatio(detail, 1f);
-
-		mainLayout.addComponent(toolbar);
-		toolbar.setWidth("100%");
+		if(toolbar!=null){
+			mainLayout.addComponent(toolbar);
+			toolbar.setWidth("100%");
+		}
 
 		setContent(mainLayout);
 
