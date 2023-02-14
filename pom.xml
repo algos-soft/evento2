@@ -6,7 +6,8 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <vaadin.version>7.7.37</vaadin.version>
+<!--        <vaadin.version>7.7.37</vaadin.version>-->
+        <vaadin.version>8.19.0</vaadin.version>
     </properties>
 
     <modelVersion>4.0.0</modelVersion>
